@@ -1,4 +1,4 @@
-app.models.Contact = Ext.regModel("app.models.Doctor", {
+app.models.Doctor = Ext.regModel("app.models.Doctor", {
     fields: [
         {name: "id", type: "int"},
         {name: "name", type: "string"}
