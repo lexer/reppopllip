@@ -15,5 +15,13 @@ app.controllers.doctors = new Ext.Controller({
                 }
             },
             edit: function(options) {
+                var id = parseInt(options.id),
+                        doctor = app.stores.doctors.getById(id);
+                if (doctor) {
+                    app.views.doctorsEdit.updateWithRecord(doctor);
+                    app.views.viewport.setActiveItem(
+                            app.views.doctorsEdit, options.animation
+                    );
+                }
             }
         });
