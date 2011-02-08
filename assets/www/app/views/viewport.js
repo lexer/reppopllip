@@ -21,7 +21,22 @@ app.views.Viewport = Ext.extend(Ext.Panel, {
                                     iconCls: 'myinfo',
                                     text: 'My info'
                                 }
-                            ]
+                            ],
+                            listeners: {
+                                'change': function (bar, tab, card) {
+//                                    var tabsArray = Ext.ComponentQuery.query('.tab');
+//                                    for (var i = 0; i < tabsArray.length; i++)
+//                                          tabsArray[i].removeCls('x-tab-active');
+//                                    TabPanel
+//                                   tab.addCls('x-tab-active');
+
+                                    for (var i = 0; i < tab.items.length; i++) {
+                                        tab.item[0].deactivate();
+                                    }
+
+                                    tab.activate();
+                                }
+                            }
                         })
             ],
             fullscreen: true,
