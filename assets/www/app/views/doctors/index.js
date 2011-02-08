@@ -40,7 +40,7 @@ app.views.DoctorsIndex = Ext.extend(Ext.Panel, {
                 }
             ],
             initComponent: function() {
-                //        app.stores.doctors.load();
+                app.stores.doctors.load();
                 app.views.DoctorsIndex.superclass.initComponent.apply(this, arguments);
             }
         });
