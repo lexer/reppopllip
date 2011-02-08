@@ -21,3 +21,8 @@
 // .mybox {
 //     @include border-radius(4px);
 // }
+
+@include pictos-iconmask('prescriptions');
+@include pictos-iconmask('myinfo');
+@include pictos-iconmask('doctors');
+@include pictos-iconmask('activity');

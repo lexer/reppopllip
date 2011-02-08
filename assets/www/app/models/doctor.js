@@ -82,11 +82,12 @@ app.models.Doctor = Ext.regModel("app.models.Doctor", {
                 {name: "id", type: "string"},
                 {name: "name", type: "string"}
             ],
+            hasMany: {model: 'Prescription', name: 'prescriptions'},
             proxy: {
                 type: "doctorstorage"
             }
         });
 
 app.stores.doctors = new Ext.data.Store({
-            model: "app.models.Doctor",
+            model: "app.models.Doctor"
         });

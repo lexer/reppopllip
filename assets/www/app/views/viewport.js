@@ -1,4 +1,29 @@
 app.views.Viewport = Ext.extend(Ext.Panel, {
+            dockedItems: [
+                new Ext.TabBar({
+                            dock : 'bottom',
+                            ui   : 'dark',
+                            layout: { pack: 'center'},
+                            items: [
+                                {
+                                    iconCls: 'activity',
+                                    text: 'Activity'
+                                },
+                                {
+                                    iconCls: 'prescriptions',
+                                    text: 'Prescriptions'
+                                },
+                                {
+                                    iconCls: 'doctors',
+                                    text: 'Doctors'
+                                },
+                                {
+                                    iconCls: 'myinfo',
+                                    text: 'My info'
+                                }
+                            ]
+                        })
+            ],
             fullscreen: true,
             layout: 'card',
             cardSwitchAnimation: 'slide',
