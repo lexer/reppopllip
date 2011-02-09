@@ -44,7 +44,7 @@ app.views.DoctorsShow = Ext.extend(Ext.Panel, {
                 {
                     xtype:'button',
                     ui  : 'confirm-round',
-                    text: 'dfgdfgfd'
+                    text: 'Delete'
                 }
             ],
             updateWithRecord: function(record) {
