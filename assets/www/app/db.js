@@ -1,5 +1,6 @@
 var db = {
     Doctor: null,
+    Prescription: null,
 
 
     init: function(callback) {
@@ -8,8 +9,25 @@ var db = {
         //persistence.reset();
 
         this.Doctor = persistence.define('Doctor', {
-                    name: "TEXT"
+                    name: "TEXT",
+                    address: "TEXT",
+                    city: "TEXT",
+                    state: "TEXT",
+                    phone: "TEXT"
                 });
+
+        this.Prescription = persistence.define('Doctor', {
+                    name: "TEXT",
+                    description: "TEXT",
+                    city: "TEXT",
+                    quantity: "INT"
+                });
+
+                {name: "id", type: "string"},
+                {name: "name", type: "string"},
+                {name: "description", type: "string"},
+                {name: "quantity", type: "int"},
+                {name: 'doctor_id', type: 'string'}
 
         persistence.schemaSync(function(tx) {
             // tx is the transaction object of the transaction that was
