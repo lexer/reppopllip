@@ -7,7 +7,7 @@ Ext.regApplication({
                 console.log('Launched');
 
                 db.init(function(){
-                    //db.seed();
+                    db.seed();
                     that.views.viewport = new that.views.Viewport();
                 });
             },

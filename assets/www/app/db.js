@@ -17,7 +17,6 @@ var db = {
         this.Prescription = persistence.define('Prescription', {
                     name: "TEXT",
                     description: "TEXT",
-                    city: "TEXT",
                     quantity: "INT"
                 });
 
@@ -32,10 +31,21 @@ var db = {
     },
 
     seed: function() {
-        var doctorSammy = new this.Doctor({name: "Sammy"});
-        var docotrAnthony = new this.Doctor({name: "Anthony"});
-        persistence.add(doctorSammy);
-        persistence.add(docotrAnthony);
+        var doctor = new this.Doctor({
+                    name: "Sammy Caranza",
+                    address: "111 Lawrence Street",
+                    city: "Brooklyn",
+                    state: "NY",
+                    phone: "34234324324"
+                });
+        var prescription = new this.Prescription({
+                    name: "Sammy Caranza",
+                    description: "Very powerful pill",
+                    quantity: 3
+                });
+        prescription.doctor = doctor;
+        persistence.add(doctor);
+        persistence.add(prescription);
     }
 }
 

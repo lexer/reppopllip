@@ -5,22 +5,23 @@ Ext.data.ProxyMgr.registerType("prescriptionstorage", Ext.extend(Ext.data.Proxy,
             read: function(operation, callback, scope) {
                 var thisProxy = this;
 
-                db.Doctor.all().list(null, function(dbDoctors) {
-                    var doctors = [];
+                db.Prescription.prefetch('doctor').all().list(null, function(results) {
+                    var pills = [];
 
-                    for (var i = 0; i < dbDoctors.length; i++) {
-                        var dbDoctor = dbDoctors[i];
-                        var doctor = new thisProxy.model({
-                                    id: dbDoctor.id,
-                                    name: dbDoctor.name
+                    for (var i = 0; i < results.length; i++) {
+                        var result = results[i];
+                        var pill = new thisProxy.model({
+                                    id: result.id,
+                                    name: result.name,
+                                    quantity: result.quantity
                                 });
-                        doctors.push(doctor);
+                        pills.push(pill);
                     }
 
                     //return model instances in a result set
                     operation.resultSet = new Ext.data.ResultSet({
-                                records: doctors,
-                                total  : doctors.length,
+                                records: pills,
+                                total  : pills.length,
                                 loaded : true
                             });
 
@@ -35,41 +36,41 @@ Ext.data.ProxyMgr.registerType("prescriptionstorage", Ext.extend(Ext.data.Proxy,
                 });
             },
             update: function(operation, callback, scope) {
-                var records = operation.records,
-                        length = records.length,
-                        record, id, i;
-
-                var updatedRecordsCount = 0;
-
-                operation.setStarted();
-
-                for (i = 0; i < length; i++) {
-                    record = records[i];
-
-                    data = record.data;
-
-                    db.Doctor.all().filter("id", '=', data.id).one(function(doctor) {
-                        updatedRecordsCount++;
-
-                        persistence.transaction(function(tx) {
-
-                            doctor.name = data.name;
-
-                            persistence.flush(tx, function() {
-                                if (updatedRecordsCount == length) {
-
-                                    operation.setCompleted();
-                                    operation.setSuccessful();
-
-                                    if (typeof callback == 'function') {
-                                        callback.call(scope || this, operation);
-                                    }
-                                }
-                            });
-                        });
-
-                    })
-                }
+//                var records = operation.records,
+//                        length = records.length,
+//                        record, id, i;
+//
+//                var updatedRecordsCount = 0;
+//
+//                operation.setStarted();
+//
+//                for (i = 0; i < length; i++) {
+//                    record = records[i];
+//
+//                    data = record.data;
+//
+//                    db.Doctor.all().filter("id", '=', data.id).one(function(doctor) {
+//                        updatedRecordsCount++;
+//
+//                        persistence.transaction(function(tx) {
+//
+//                            doctor.name = data.name;
+//
+//                            persistence.flush(tx, function() {
+//                                if (updatedRecordsCount == length) {
+//
+//                                    operation.setCompleted();
+//                                    operation.setSuccessful();
+//
+//                                    if (typeof callback == 'function') {
+//                                        callback.call(scope || this, operation);
+//                                    }
+//                                }
+//                            });
+//                        });
+//
+//                    })
+//                }
             },
             destroy: function(operation, callback, scope) {
 
@@ -85,9 +86,7 @@ app.models.Prescription = Ext.regModel("app.models.Prescription", {
                 {name: "quantity", type: "int"},
                 {name: 'doctor_id', type: 'string'}
             ],
-            associations: [
-                {type: 'belongsTo', model: 'Doctor'}
-            ],
+            belongsTo: 'Doctor',
             proxy: {
                 type: "prescriptionstorage"
             }
