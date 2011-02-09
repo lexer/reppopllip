@@ -80,7 +80,11 @@ Ext.data.ProxyMgr.registerType("doctorstorage", Ext.extend(Ext.data.Proxy, {
 app.models.Doctor = Ext.regModel("app.models.Doctor", {
             fields: [
                 {name: "id", type: "string"},
-                {name: "name", type: "string"}
+                {name: "name", type: "string"},
+                {name: "address", type: "string"},
+                {name: "city", type: "string"},
+                {name: "state", type: "string"},
+                {name: "phone", type: "string"}
             ],
             hasMany: {model: 'Prescription', name: 'prescriptions'},
             proxy: {
