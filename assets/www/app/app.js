@@ -7,7 +7,7 @@ Ext.regApplication({
                 console.log('Launched');
 
                 db.init(function(){
-//                    db.seed();
+                    //db.seed();
                     that.views.viewport = new that.views.Viewport();
                 });
             },
@@ -19,14 +19,3 @@ Ext.regApplication({
                 alert('launched inside phonegap');
             }
         });
-
-//Doctor.all()
-//.filter("name",'=',"Krevedko")
-//.or(new persistence.PropertyFilter('name', '=', "Kurnikova"))
-//.order("name", false)
-//.list(null,function(results) {
-//	results.forEach(function (r) {
-//		console.log(r.name);
-//		});
-//});
-//},

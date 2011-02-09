@@ -6,8 +6,6 @@ var db = {
     init: function(callback) {
         persistence.store.websql.config(persistence, 'pillpopper', 'pill popper database', 5 * 1024 * 1024);
 
-        //persistence.reset();
-
         this.Doctor = persistence.define('Doctor', {
                     name: "TEXT",
                     address: "TEXT",
@@ -16,18 +14,14 @@ var db = {
                     phone: "TEXT"
                 });
 
-        this.Prescription = persistence.define('Doctor', {
+        this.Prescription = persistence.define('Prescription', {
                     name: "TEXT",
                     description: "TEXT",
                     city: "TEXT",
                     quantity: "INT"
                 });
 
-                {name: "id", type: "string"},
-                {name: "name", type: "string"},
-                {name: "description", type: "string"},
-                {name: "quantity", type: "int"},
-                {name: 'doctor_id', type: 'string'}
+        this.Doctor.hasMany('prescriptions', this.Prescription, 'doctor');
 
         persistence.schemaSync(function(tx) {
             // tx is the transaction object of the transaction that was
@@ -44,3 +38,14 @@ var db = {
         persistence.add(docotrAnthony);
     }
 }
+
+//Doctor.all()
+//.filter("name",'=',"Krevedko")
+//.or(new persistence.PropertyFilter('name', '=', "Kurnikova"))
+//.order("name", false)
+//.list(null,function(results) {
+//	results.forEach(function (r) {
+//		console.log(r.name);
+//		});
+//});
+//},

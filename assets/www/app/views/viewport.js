@@ -79,12 +79,12 @@ app.views.Viewport = Ext.extend(Ext.Panel, {
                 //put instances of cards into viewport
                 Ext.apply(this, {
                             items: [
+                                app.views.activityIndex,
                                 app.views.doctorsIndex,
                                 app.views.doctorsShow,
                                 app.views.doctorsEdit,
                                 app.views.prescriptionsIndex,
-                                app.views.myInfoShow,
-                                app.views.activityIndex
+                                app.views.myInfoShow
                             ]
                         });
                 app.views.Viewport.superclass.initComponent.apply(this, arguments);
