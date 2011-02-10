@@ -1,11 +1,12 @@
 app.controllers.prescriptions = new Ext.Controller({
             index: function(options) {
+                app.stores.prescriptions.sync();
                 app.views.viewport.setActiveItem(
                         app.views.prescriptionsIndex, options.animation
                 );
             },
             show: function(options) {
-                app.stores.prescriptions.load();
+                app.stores.prescriptions.sync();
                 var id = options.id,
                         prescription = app.stores.prescriptions.getById(id);
                 if (prescription) {

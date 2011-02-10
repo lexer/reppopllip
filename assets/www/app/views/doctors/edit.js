@@ -1,8 +1,8 @@
-app.views.DoctorsEdit = Ext.extend(Ext.form.FormPanel, {
+app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
             dockedItems: [
                 {
                     xtype: 'toolbar',
-                    title: 'Edit doctor',
+                    title: 'New doctor',
                     items: [
                         {
                             id: 'cancel',
@@ -10,12 +10,20 @@ app.views.DoctorsEdit = Ext.extend(Ext.form.FormPanel, {
                             ui: 'back',
                             listeners: {
                                 'tap': function () {
-                                    Ext.dispatch({
-                                                controller: app.controllers.doctors,
-                                                action: 'show',
-                                                id: this.record.getId(),
-                                                animation: {type:'slide', direction:'right'}
-                                            });
+                                    if (this.record.id) {
+                                        Ext.dispatch({
+                                                    controller: app.controllers.doctors,
+                                                    action: 'show',
+                                                    id: this.record.getId(),
+                                                    animation: {type:'slide', direction:'right'}
+                                                });
+                                    } else {
+                                        Ext.dispatch({
+                                                    controller: app.controllers.doctors,
+                                                    action: 'index',
+                                                    animation: {type:'slide', direction:'left'}
+                                                });
+                                    }
                                 }
                             }
                         },
@@ -27,13 +35,20 @@ app.views.DoctorsEdit = Ext.extend(Ext.form.FormPanel, {
                             listeners: {
                                 'tap': function () {
                                     this.form.updateRecord(this.record, true);
-                                    this.record.save();
-                                    Ext.dispatch({
-                                                controller: app.controllers.doctors,
-                                                action: 'show',
-                                                id: this.record.getId(),
-                                                animation: {type:'slide', direction:'right'}
-                                            });
+
+                                    if (this.record.id) {
+                                        Ext.dispatch({
+                                                    controller: app.controllers.doctors,
+                                                    action: 'update',
+                                                    doctor: this.record
+                                                });
+                                    } else {
+                                        Ext.dispatch({
+                                                    controller: app.controllers.doctors,
+                                                    action: 'create',
+                                                    doctor: this.record
+                                                });
+                                    }
                                 }
                             }
                         }
@@ -43,16 +58,67 @@ app.views.DoctorsEdit = Ext.extend(Ext.form.FormPanel, {
             submitOnAction: false,
             items: [
                 {
-                    name : 'name',
-                    label: 'Name',
-                    xtype: 'textfield'
+                    id: 'form',
+                    xtype: 'form',
+                    submitOnAction: false,
+                    items: [
+                        {
+                            name : 'name',
+                            label: 'Name',
+                            xtype: 'textfield'
+                        },
+                        {
+                            name : 'address',
+                            label: 'Address',
+                            xtype: 'textfield'
+                        },
+                        {
+                            name : 'city',
+                            label: 'City',
+                            xtype: 'textfield'
+                        },
+                        {
+                            name : 'state',
+                            label: 'State',
+                            xtype: 'textfield'
+                        },
+                        {
+                            name : 'phone',
+                            label: 'Phone',
+                            xtype: 'textfield'
+                        }
+                    ]
+                },
+                {
+                    xtype:'button',
+                    id  : 'delete',
+                    ui:  'decline',
+                    text: 'Delete',
+                    handler: function() {
+                        var id = this.record.getId();
+
+//                        Ext.Msg.confirm("Confirmation", "Are you sure you want to delete doctor?", function(result) {
+//                            if (result == 'yes')
+//                            {
+                        Ext.dispatch({
+                                    controller: app.controllers.doctors,
+                                    action: 'destroy',
+                                    id: id
+                                });
+//                            }
+//                        });
+
+                    }
                 }
-            ],
+            ]
+            ,
             updateWithRecord: function(record) {
-                this.load(record);
+                var form = this.getComponent('form');
+                form.load(record);
                 var toolbar = this.getDockedItems()[0];
+                this.getComponent('delete').record = record;
                 toolbar.getComponent('cancel').record = record;
                 toolbar.getComponent('apply').record = record;
-                toolbar.getComponent('apply').form = this;
+                toolbar.getComponent('apply').form = form;
             }
         });

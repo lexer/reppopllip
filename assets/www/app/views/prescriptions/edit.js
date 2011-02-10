@@ -31,8 +31,7 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.form.FormPanel, {
                                     Ext.dispatch({
                                                 controller: app.controllers.prescriptions,
                                                 action: 'show',
-                                                id: this.record.getId(),
-                                                animation: {type:'slide', direction:'right'}
+                                                id: this.record.getId()
                                             });
                                 }
                             }

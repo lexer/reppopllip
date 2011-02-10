@@ -14,10 +14,9 @@ app.views.DoctorsIndex = Ext.extend(Ext.Panel, {
                             listeners: {
                                 'tap': function () {
                                     Ext.dispatch({
-                                        controller: app.controllers.doctors,
-                                        action: 'edit',
-                                        id: this.record.getId()
-                                    });
+                                                controller: app.controllers.doctors,
+                                                action: 'add'
+                                            });
                                 }
                             }
                         }
@@ -25,22 +24,29 @@ app.views.DoctorsIndex = Ext.extend(Ext.Panel, {
                 }
 
             ],
+            layout: 'fit',
+            styleHtmlContent:true,
             items: [
                 {
                     xtype: 'list',
                     store: app.stores.doctors,
-                    itemTpl: '{id} {name}',
+                    itemTpl:[
+                        '<h4>{name}</h4>',
+                        '<p>{address}</p>',
+                        '<p>{city}, {state}</p>',
+                        '<p>{phone}</p>'
+                    ],
                     onItemDisclosure: function (record) {
                         Ext.dispatch({
-                            controller: app.controllers.doctors,
-                            action: 'show',
-                            id: record.getId()
-                        });
+                                    controller: app.controllers.doctors,
+                                    action: 'show',
+                                    id: record.getId()
+                                });
                     }
                 }
             ],
             initComponent: function() {
-                app.stores.doctors.load();
+
                 app.views.DoctorsIndex.superclass.initComponent.apply(this, arguments);
             }
         });

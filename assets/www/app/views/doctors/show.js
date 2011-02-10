@@ -27,7 +27,8 @@ app.views.DoctorsShow = Ext.extend(Ext.Panel, {
                                     Ext.dispatch({
                                                 controller: app.controllers.doctors,
                                                 action: 'edit',
-                                                id: this.record.getId()
+                                                id: this.record.getId(),
+                                               animation: {type:'slide', direction:'right'}
                                             });
                                 }
                             }
@@ -38,19 +39,18 @@ app.views.DoctorsShow = Ext.extend(Ext.Panel, {
             styleHtmlContent:true,
             scroll: 'vertical',
             items: [
-                {tpl:[
-                    '<h4>{name}</h4>'
-                ]},
                 {
-                    xtype:'button',
-                    ui  : 'confirm-round',
-                    text: 'Delete'
-                }
+                    id: 'details',
+                    tpl:[
+                        '<h4>{name}</h4>',
+                        '<p>{address}</p>',
+                        '<p>{city}, {state}</p>',
+                        '<p>{phone}</p>'
+                    ]}
+
             ],
             updateWithRecord: function(record) {
-                Ext.each(this.items.items, function(item) {
-                    item.update(record.data);
-                });
+                this.getComponent('details').update(record.data);
                 var toolbar = this.getDockedItems()[0];
                 toolbar.setTitle(record.get('name'));
                 toolbar.getComponent('edit').record = record;

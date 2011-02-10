@@ -43,7 +43,7 @@ app.views.PrescriptionsIndex = Ext.extend(Ext.Panel, {
                 }
             ],
             initComponent: function() {
-                app.stores.prescriptions.load();
+                //app.stores.prescriptions.load();
                 app.views.PrescriptionsIndex.superclass.initComponent.apply(this, arguments);
             }
         });
