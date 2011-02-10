@@ -1,8 +1,8 @@
-app.views.DoctorsShow = Ext.extend(Ext.Panel, {
+app.views.PrescriptionsShow = Ext.extend(Ext.Panel, {
             dockedItems: [
                 {
                     xtype: 'toolbar',
-                    title: 'View doctor',
+                    title: 'View prescription',
                     items: [
                         {
                             text: 'Back',
@@ -10,7 +10,7 @@ app.views.DoctorsShow = Ext.extend(Ext.Panel, {
                             listeners: {
                                 'tap': function () {
                                     Ext.dispatch({
-                                                controller: app.controllers.doctors,
+                                                controller: app.controllers.prescriptions,
                                                 action: 'index',
                                                 animation: {type:'slide', direction:'right'}
                                             });
@@ -25,10 +25,10 @@ app.views.DoctorsShow = Ext.extend(Ext.Panel, {
                             listeners: {
                                 'tap': function () {
                                     Ext.dispatch({
-                                                controller: app.controllers.doctors,
-                                                action: 'edit',
-                                                id: this.record.getId()
-                                            });
+                                        controller: app.controllers.prescriptions,
+                                        action: 'edit',
+                                        id: this.record.getId()
+                                    });
                                 }
                             }
                         }

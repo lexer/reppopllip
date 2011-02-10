@@ -6,6 +6,8 @@ var db = {
     init: function(callback) {
         persistence.store.websql.config(persistence, 'pillpopper', 'pill popper database', 5 * 1024 * 1024);
 
+        //persistence.reset();
+
         this.Doctor = persistence.define('Doctor', {
                     name: "TEXT",
                     address: "TEXT",
@@ -31,6 +33,7 @@ var db = {
     },
 
     seed: function() {
+
         var doctor = new this.Doctor({
                     name: "Sammy Caranza",
                     address: "111 Lawrence Street",
@@ -39,10 +42,11 @@ var db = {
                     phone: "34234324324"
                 });
         var prescription = new this.Prescription({
-                    name: "Sammy Caranza",
+                    name: "MegaPill",
                     description: "Very powerful pill",
                     quantity: 3
                 });
+
         prescription.doctor = doctor;
         persistence.add(doctor);
         persistence.add(prescription);

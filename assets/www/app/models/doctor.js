@@ -86,7 +86,10 @@ app.models.Doctor = Ext.regModel("app.models.Doctor", {
                 {name: "state", type: "string"},
                 {name: "phone", type: "string"}
             ],
-            hasMany: {model: 'Prescription', name: 'prescriptions'},
+//            associations: [
+//                {type: 'hasMany', model: 'Prescription',    name: 'prescriptions'}
+//            ],
+
             proxy: {
                 type: "doctorstorage"
             }

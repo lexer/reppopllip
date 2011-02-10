@@ -1,11 +1,40 @@
 Ext.data.ProxyMgr.registerType("prescriptionstorage", Ext.extend(Ext.data.Proxy, {
             create: function(operation, callback, scope) {
+                var thisProxy = this;
 
+                var records = operation.records,
+                        length = records.length,
+                        record, id, i;
+
+                operation.setStarted();
+
+                for (i = 0; i < length; i++) {
+                    record = records[i];
+
+                    data = record.data;
+
+
+                    var prescription = new db.Prescription({
+                                name: data.name,
+                                quantity: data.quantity
+                            });
+
+                    persistence.add(prescription);
+
+                    data.id = prescription.id;
+                }
+
+                operation.setCompleted();
+                operation.setSuccessful();
+
+                if (typeof callback == 'function') {
+                    callback.call(scope || thisProxy, operation);
+                }
             },
             read: function(operation, callback, scope) {
                 var thisProxy = this;
 
-                db.Prescription.prefetch('doctor').all().list(null, function(results) {
+                db.Prescription.all().prefetch('doctor').list(null, function(results) {
                     var pills = [];
 
                     for (var i = 0; i < results.length; i++) {
@@ -13,7 +42,9 @@ Ext.data.ProxyMgr.registerType("prescriptionstorage", Ext.extend(Ext.data.Proxy,
                         var pill = new thisProxy.model({
                                     id: result.id,
                                     name: result.name,
-                                    quantity: result.quantity
+                                    quantity: result.quantity,
+                                    doctor_id: result.doctor.id,
+                                    doctor_name: result.doctor.name
                                 });
                         pills.push(pill);
                     }
@@ -36,41 +67,44 @@ Ext.data.ProxyMgr.registerType("prescriptionstorage", Ext.extend(Ext.data.Proxy,
                 });
             },
             update: function(operation, callback, scope) {
-//                var records = operation.records,
-//                        length = records.length,
-//                        record, id, i;
-//
-//                var updatedRecordsCount = 0;
-//
-//                operation.setStarted();
-//
-//                for (i = 0; i < length; i++) {
-//                    record = records[i];
-//
-//                    data = record.data;
-//
-//                    db.Doctor.all().filter("id", '=', data.id).one(function(doctor) {
-//                        updatedRecordsCount++;
-//
-//                        persistence.transaction(function(tx) {
-//
-//                            doctor.name = data.name;
-//
-//                            persistence.flush(tx, function() {
-//                                if (updatedRecordsCount == length) {
-//
-//                                    operation.setCompleted();
-//                                    operation.setSuccessful();
-//
-//                                    if (typeof callback == 'function') {
-//                                        callback.call(scope || this, operation);
-//                                    }
-//                                }
-//                            });
-//                        });
-//
-//                    })
-//                }
+                var thisProxy = this;
+
+                var records = operation.records,
+                        length = records.length,
+                        record, id, i;
+
+                var updatedRecordsCount = 0;
+
+                operation.setStarted();
+
+                for (i = 0; i < length; i++) {
+                    record = records[i];
+
+                    data = record.data;
+
+                    db.Prescription.all().filter("id", '=', data.id).one(function(prescription) {
+                        updatedRecordsCount++;
+
+                        persistence.transaction(function(tx) {
+
+                            prescription.name = data.name;
+                            prescription.quantity = data.quantity;
+
+                            persistence.flush(tx, function() {
+                                if (updatedRecordsCount == length) {
+
+                                    operation.setCompleted();
+                                    operation.setSuccessful();
+
+                                    if (typeof callback == 'function') {
+                                        callback.call(scope || thisProxy, operation);
+                                    }
+                                }
+                            });
+                        });
+
+                    })
+                }
             },
             destroy: function(operation, callback, scope) {
 
@@ -84,9 +118,12 @@ app.models.Prescription = Ext.regModel("app.models.Prescription", {
                 {name: "name", type: "string"},
                 {name: "description", type: "string"},
                 {name: "quantity", type: "int"},
-                {name: 'doctor_id', type: 'string'}
+                {name: 'doctor_id', type: 'string'},
+                {name: 'doctor_name', type: 'string'}
             ],
-            belongsTo: 'Doctor',
+//            associations: [
+//                {type: 'belongsTo', model: 'Doctor',    name: 'doctor'}
+//            ],
             proxy: {
                 type: "prescriptionstorage"
             }

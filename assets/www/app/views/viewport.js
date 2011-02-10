@@ -72,6 +72,8 @@ app.views.Viewport = Ext.extend(Ext.Panel, {
                             doctorsIndex: new app.views.DoctorsIndex(),
                             doctorsShow: new app.views.DoctorsShow(),
                             doctorsEdit: new app.views.DoctorsEdit(),
+                            prescriptionsShow: new app.views.PrescriptionsShow(),
+                            prescriptionsEdit: new app.views.PrescriptionsEdit(),
                             prescriptionsIndex: new app.views.PrescriptionsIndex(),
                             myInfoShow: new app.views.MyInfoShow(),
                             activityIndex: new app.views.ActivityIndex()
@@ -84,6 +86,8 @@ app.views.Viewport = Ext.extend(Ext.Panel, {
                                 app.views.doctorsShow,
                                 app.views.doctorsEdit,
                                 app.views.prescriptionsIndex,
+                                app.views.prescriptionsShow,
+                                app.views.prescriptionsEdit,
                                 app.views.myInfoShow
                             ]
                         });

@@ -13,11 +13,10 @@ app.views.PrescriptionsIndex = Ext.extend(Ext.Panel, {
                             ui: 'action',
                             listeners: {
                                 'tap': function () {
-//                                    Ext.dispatch({
-//                                        controller: app.controllers.doctors,
-//                                        action: 'edit',
-//                                        id: this.record.getId()
-//                                    });
+                                    Ext.dispatch({
+                                        controller: app.controllers.prescriptions,
+                                        action: 'add'
+                                    })
                                 }
                             }
                         }
@@ -26,21 +25,25 @@ app.views.PrescriptionsIndex = Ext.extend(Ext.Panel, {
 
             ],
             items: [
-//                {
-//                    xtype: 'list',
-//                    store: app.stores.doctors,
-//                    itemTpl: '{id} {name}',
-//                    onItemDisclosure: function (record) {
-//                        Ext.dispatch({
-//                            controller: app.controllers.doctors,
-//                            action: 'show',
-//                            id: record.getId()
-//                        });
-//                    }
-//                }
+                {
+                    xtype: 'list',
+                    store: app.stores.prescriptions,
+                    itemTpl:
+                            ['<h4>{name}</h4>',
+                             '<p>{quantity}</p>',
+                             '<p>{doctor_name}</p>'
+                            ],
+                    onItemDisclosure: function (record) {
+                        Ext.dispatch({
+                            controller: app.controllers.prescriptions,
+                            action: 'show',
+                            id: record.getId()
+                                })
+                    }
+                }
             ],
             initComponent: function() {
-//                app.stores.doctors.load();
+                app.stores.prescriptions.load();
                 app.views.PrescriptionsIndex.superclass.initComponent.apply(this, arguments);
             }
         });

@@ -16,7 +16,7 @@ app.views.MyInfoShow = Ext.extend(Ext.Panel, {
 
             ],
             initComponent: function() {
-                app.stores.doctors.load();                app.stores.doctors.load();                app.stores.doctors.load();                app.stores.doctors.load();
+                app.stores.doctors.load();
                 app.views.MyInfoShow.superclass.initComponent.apply(this, arguments);
             }
         });
