@@ -10,7 +10,7 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
                             ui: 'back',
                             listeners: {
                                 'tap': function () {
-                                    if (this.record.id) {
+                                    if (this.record.getId()) {
                                         Ext.dispatch({
                                                     controller: app.controllers.doctors,
                                                     action: 'show',
@@ -36,7 +36,7 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
                                 'tap': function () {
                                     this.form.updateRecord(this.record, true);
 
-                                    if (this.record.id) {
+                                    if (this.record.getId()) {
                                         Ext.dispatch({
                                                     controller: app.controllers.doctors,
                                                     action: 'update',

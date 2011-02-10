@@ -70,7 +70,7 @@ app.controllers.doctors = new Ext.Controller({
                                         controller: app.controllers.doctors,
                                         action: 'show',
                                         id: doctor.id,
-                                        animation: {type:'slide', direction:'left'}
+                                        animation: {type:'slide', direction:'right'}
                                     });
 
                         });
@@ -101,7 +101,7 @@ app.controllers.doctors = new Ext.Controller({
                             controller: app.controllers.doctors,
                             action: 'index',
                             //id: doctor.id,
-                            animation: {type:'slide', direction:'left'}
+                            animation: {type:'slide', direction:'right'}
                         });
 
             },
@@ -115,7 +115,7 @@ app.controllers.doctors = new Ext.Controller({
                     Ext.dispatch({
                             controller: app.controllers.doctors,
                             action: 'index',
-                            animation: {type:'slide', direction:'left'}
+                            animation: {type:'slide', direction:'right'}
                         });
                 });
             }
