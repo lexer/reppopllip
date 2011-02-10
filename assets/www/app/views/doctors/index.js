@@ -15,7 +15,8 @@ app.views.DoctorsIndex = Ext.extend(Ext.Panel, {
                                 'tap': function () {
                                     Ext.dispatch({
                                                 controller: app.controllers.doctors,
-                                                action: 'add'
+                                                action: 'add',
+                                                animation: {type:'slide', direction:'left'}
                                             });
                                 }
                             }

@@ -2,7 +2,7 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
             dockedItems: [
                 {
                     xtype: 'toolbar',
-                    title: 'New doctor',
+                    title: 'Edit doctor',
                     items: [
                         {
                             id: 'cancel',
@@ -21,7 +21,7 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
                                         Ext.dispatch({
                                                     controller: app.controllers.doctors,
                                                     action: 'index',
-                                                    animation: {type:'slide', direction:'left'}
+                                                    animation: {type:'slide', direction:'right'}
                                                 });
                                     }
                                 }

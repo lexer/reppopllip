@@ -28,7 +28,7 @@ app.views.DoctorsShow = Ext.extend(Ext.Panel, {
                                                 controller: app.controllers.doctors,
                                                 action: 'edit',
                                                 id: this.record.getId(),
-                                               animation: {type:'slide', direction:'right'}
+                                               animation: {type:'slide', direction:'left'}
                                             });
                                 }
                             }
