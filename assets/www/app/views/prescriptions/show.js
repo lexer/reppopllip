@@ -1,58 +1,57 @@
 app.views.PrescriptionsShow = Ext.extend(Ext.Panel, {
-            dockedItems: [
-                {
-                    xtype: 'toolbar',
-                    title: 'View prescription',
-                    items: [
-                        {
-                            text: 'Back',
-                            ui: 'back',
-                            listeners: {
-                                'tap': function () {
-                                    Ext.dispatch({
-                                                controller: app.controllers.prescriptions,
-                                                action: 'index',
-                                                animation: {type:'slide', direction:'right'}
-                                            });
-                                }
-                            }
-                        },
-                        {xtype:'spacer'},
-                        {
-                            id: 'edit',
-                            text: 'Edit',
-                            ui: 'action',
-                            listeners: {
-                                'tap': function () {
-                                    Ext.dispatch({
-                                        controller: app.controllers.prescriptions,
-                                        action: 'edit',
-                                        id: this.record.getId()
-                                    });
-                                }
-                            }
-                        }
-                    ]
-                }
-            ],
-            styleHtmlContent:true,
-            scroll: 'vertical',
+    dockedItems: [
+        {
+            xtype: 'toolbar',
+            title: 'View prescription',
             items: [
-                {tpl:[
-                    '<h4>{name}</h4>'
-                ]},
                 {
-                    xtype:'button',
-                    ui  : 'confirm-round',
-                    text: 'Delete'
+                    text: 'Back',
+                    ui: 'back',
+                    listeners: {
+                        'tap': function () {
+                            Ext.dispatch({
+                                controller: app.controllers.prescriptions,
+                                action: 'index',
+                                animation: {type:'slide', direction:'right'}
+                            });
+                        }
+                    }
+                },
+                {xtype:'spacer'},
+                {
+                    id: 'edit',
+                    text: 'Edit',
+                    ui: 'action',
+                    listeners: {
+                        'tap': function () {
+                            Ext.dispatch({
+                                controller: app.controllers.prescriptions,
+                                action: 'edit',
+                                id: this.record.getId()
+                            });
+                        }
+                    }
                 }
-            ],
-            updateWithRecord: function(record) {
-                Ext.each(this.items.items, function(item) {
-                    item.update(record.data);
-                });
-                var toolbar = this.getDockedItems()[0];
-                toolbar.setTitle(record.get('name'));
-                toolbar.getComponent('edit').record = record;
-            }
+            ]
+        }
+    ],
+    styleHtmlContent:true,
+    scroll: 'vertical',
+    items: [
+        {
+            tpl:                    ['<h4>{name}</h4>',
+                '<p>{description}</p>',
+                '<p>{quantity}</p>',
+                '<p>{doctor_name}</p>'
+            ]
+        }
+    ],
+    updateWithRecord: function(record) {
+        Ext.each(this.items.items, function(item) {
+            item.update(record.data);
         });
+        var toolbar = this.getDockedItems()[0];
+        toolbar.setTitle(record.get('name'));
+        toolbar.getComponent('edit').record = record;
+    }
+});

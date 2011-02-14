@@ -83,7 +83,8 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
                             id: 'doctorsSelect',
                             name : 'doctor_id',
                             label: 'Doctor',
-                            xtype: 'selectfield'
+                            xtype: 'selectfield',
+                            modal: true
                         }
                     ]
                 },
