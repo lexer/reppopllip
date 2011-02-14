@@ -41,13 +41,10 @@ app.views.DoctorsIndex = Ext.extend(Ext.Panel, {
                         Ext.dispatch({
                                     controller: app.controllers.doctors,
                                     action: 'show',
-                                    id: record.getId()
+                                    id: record.getId(),
+                                    animation: {type:'slide', direction:'left'}
                                 });
                     }
                 }
-            ],
-            initComponent: function() {
-
-                app.views.DoctorsIndex.superclass.initComponent.apply(this, arguments);
-            }
+            ]
         });

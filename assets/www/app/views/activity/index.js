@@ -24,9 +24,5 @@ app.views.ActivityIndex = Ext.extend(Ext.Panel, {
 //                        });
 //                    }
 //                }
-            ],
-            initComponent: function() {
-//                app.stores.doctors.load();
-                app.views.ActivityIndex.superclass.initComponent.apply(this, arguments);
-            }
+            ]
         });

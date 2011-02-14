@@ -50,33 +50,35 @@ app.views.MyInfoEdit = Ext.extend(Ext.Panel, {
                      items: [
                          {
                              xtype: 'textfield',
+                             placeHolder: "John Doe",
                              name: 'name',
-                             label: 'name'
+                             label: 'Name'
                          },
                          {
                              xtype: 'textfield',
                              name: 'address',
-                             label: 'address'
+                             label: 'Address'
                          },
                          {
                             xtype: 'textfield',
                             name: 'city',
-                            label: 'city'
+                            label: 'City'
                          },
                          {
                              xtype: 'textfield',
                              name: 'state',
-                             label: 'state'
+                             label: 'State'
                          },
                          {
                              xtype: 'textfield',
                              name: 'phone',
-                             label: 'phone'
+                             label: 'Phone'
                          },
                          {
-                             xtype: 'textfield',
+                             xtype: 'emailfield',
+                             placeHolder: "john@doe.com",
                              name: 'email',
-                             label: 'email'
+                             label: 'Email'
                          }
                      ]
                  },
@@ -86,33 +88,35 @@ app.views.MyInfoEdit = Ext.extend(Ext.Panel, {
                  items: [
                      {
                          xtype: 'textfield',
+                         placeHolder: "John Doe",
                          name: 'emergency_name',
-                         label: 'name'
+                         label: 'Name'
                      },
                      {
                          xtype: 'textfield',
                          name: 'emergency_address',
-                         label: 'address'
+                         label: 'Address'
                      },
                      {
                         xtype: 'textfield',
                         name: 'emergency_city',
-                        label: 'city'
+                        label: 'City'
                      },
                      {
                          xtype: 'textfield',
                          name: 'emergency_state',
-                         label: 'state'
+                         label: 'State'
                      },
                      {
                          xtype: 'textfield',
                          name: 'emergency_phone',
-                         label: 'phone'
+                         label: 'Phone'
                      },
                      {
-                         xtype: 'textfield',
+                         xtype: 'emailfield',
+                         placeHolder: "john@doe.com",
                          name: 'emergency_email',
-                         label: 'email'
+                         label: 'Email'
                      }
                  ]
              }
