@@ -22,7 +22,7 @@ app.controllers.doctors = new Ext.Controller({
             app.stores.doctors.loadData(models, false);
 
             app.views.viewport.setActiveItem(
-                    app.views.doctorsIndex, options.animation
+                    app.views.doctorsIndex, null // options.animation
                     );
         });
     },
@@ -34,7 +34,7 @@ app.controllers.doctors = new Ext.Controller({
             var model = controller.createModel(doctor);
             app.views.doctorsShow.updateWithRecord(model);
             app.views.viewport.setActiveItem(
-                    app.views.doctorsShow, options.animation
+                    app.views.doctorsShow, null // options.animation
                     );
         });
     },
@@ -47,7 +47,7 @@ app.controllers.doctors = new Ext.Controller({
             var model = controller.createModel(doctor);
             app.views.doctorsEdit.updateWithRecord(model);
             app.views.viewport.setActiveItem(
-                    app.views.doctorsEdit, options.animation
+                    app.views.doctorsEdit, null // options.animation
                     );
         });
     },
@@ -70,7 +70,7 @@ app.controllers.doctors = new Ext.Controller({
                         controller: app.controllers.doctors,
                         action: 'show',
                         id: doctor.id,
-                        animation: {type:'slide', direction:'right'}
+                        animation: options.animation
                     });
 
                 });
@@ -81,7 +81,7 @@ app.controllers.doctors = new Ext.Controller({
         var doctor = new app.models.Doctor();
         app.views.doctorsEdit.updateWithRecord(doctor);
         app.views.viewport.setActiveItem(
-                app.views.doctorsEdit, options.animation
+                app.views.doctorsEdit, null // options.animation
                 );
     } ,
     create: function(options) {
@@ -100,8 +100,8 @@ app.controllers.doctors = new Ext.Controller({
         Ext.dispatch({
             controller: app.controllers.doctors,
             action: 'index',
-            //id: doctor.id,
-            animation: {type:'slide', direction:'right'}
+            animation: options.animation
+
         });
 
     },
@@ -115,7 +115,7 @@ app.controllers.doctors = new Ext.Controller({
             Ext.dispatch({
                 controller: app.controllers.doctors,
                 action: 'index',
-                animation: {type:'slide', direction:'right'}
+                animation: options.animation
             });
         });
     }

@@ -28,3 +28,5 @@ app.views.ActivityIndex = Ext.extend(Ext.Panel, {
 //                }
     ]
 });
+
+Ext.reg('loansList', app.views.ActivityIndex);
