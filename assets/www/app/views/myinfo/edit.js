@@ -1,4 +1,5 @@
 app.views.MyInfoEdit = Ext.extend(Ext.Panel, {
+
     dockedItems: [
         {
             xtype: 'toolbar',

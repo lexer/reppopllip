@@ -1,4 +1,5 @@
 app.views.PrescriptionsIndex = Ext.extend(Ext.Panel, {
+
     dockedItems: [
         {
             xtype: 'toolbar',

@@ -1,9 +1,12 @@
 app.views.MyInfoShow = Ext.extend(Ext.Panel, {
+
     dockedItems: [
         {
             xtype: 'toolbar',
             title: 'My info',
             items: [
+                {xtype:'spacer'},
+                {xtype:'spacer'},
                 {
                     id:'edit',
                     text: 'Edit',
@@ -17,8 +20,7 @@ app.views.MyInfoShow = Ext.extend(Ext.Panel, {
                             });
                         }
                     }
-                },
-                {xtype:'spacer'}
+                }
             ]
         }
     ],

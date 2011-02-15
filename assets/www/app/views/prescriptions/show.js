@@ -1,4 +1,5 @@
 app.views.PrescriptionsShow = Ext.extend(Ext.Panel, {
+
     dockedItems: [
         {
             xtype: 'toolbar',
@@ -37,6 +38,7 @@ app.views.PrescriptionsShow = Ext.extend(Ext.Panel, {
     ],
     styleHtmlContent:true,
     scroll: 'vertical',
+    layout: 'fit',
     items: [
         {
             tpl:                    ['<h4>{name}</h4>',
