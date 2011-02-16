@@ -1,4 +1,4 @@
-app.views.MyInfoEdit = Ext.extend(Ext.Panel, {
+app.views.myInfoEdit = new Ext.extend(Ext.Panel, {
 
     dockedItems: [
         {

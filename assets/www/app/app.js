@@ -9,17 +9,17 @@ Ext.regApplication({
         db.init(function() {
             //db.seed();
         
-            Ext.apply(app.views, {
-                doctorsIndex: new app.views.DoctorsIndex(),
-                doctorsShow: new app.views.DoctorsShow(),
-                doctorsEdit: new app.views.DoctorsEdit(),
-                prescriptionsShow: new app.views.PrescriptionsShow(),
-                prescriptionsEdit: new app.views.PrescriptionsEdit(),
-                prescriptionsIndex: new app.views.PrescriptionsIndex(),
-                myInfoShow: new app.views.MyInfoShow(),
-                myInfoEdit: new app.views.MyInfoEdit(),
-                activityIndex: new app.views.ActivityIndex()
-            });
+//            Ext.apply(app.views, {
+//                doctorsIndex: new app.views.DoctorsIndex(),
+//                doctorsShow: new app.views.DoctorsShow(),
+//                doctorsEdit: new app.views.DoctorsEdit(),
+//                prescriptionsShow: new app.views.PrescriptionsShow(),
+//                prescriptionsEdit: new app.views.PrescriptionsEdit(),
+//                prescriptionsIndex: new app.views.PrescriptionsIndex(),
+//                myInfoShow: new app.views.MyInfoShow(),
+//                myInfoEdit: new app.views.MyInfoEdit(),
+//                activityIndex: new app.views.ActivityIndex()
+//            });
 
             app.views.viewport = new app.views.Viewport();
 

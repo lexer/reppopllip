@@ -1,4 +1,4 @@
-app.views.PrescriptionsShow = Ext.extend(Ext.Panel, {
+app.views.prescriptionsShow = new Ext.extend(Ext.Panel, {
 
     dockedItems: [
         {

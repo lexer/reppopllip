@@ -1,4 +1,4 @@
-app.views.ActivityIndex = Ext.extend(Ext.Panel, {
+app.views.activityIndex = new Ext.extend(Ext.Panel, {
 
     dockedItems: [
         {
@@ -28,5 +28,3 @@ app.views.ActivityIndex = Ext.extend(Ext.Panel, {
 //                }
     ]
 });
-
-Ext.reg('loansList', app.views.ActivityIndex);
