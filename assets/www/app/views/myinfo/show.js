@@ -1,4 +1,4 @@
-app.views.myInfoShow = new Ext.extend(Ext.Panel, {
+app.views.MyinfoShow = Ext.extend(Ext.Panel, {
 
     dockedItems: [
         {

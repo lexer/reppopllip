@@ -6,7 +6,7 @@ app.controllers.myinfo = new Ext.Controller({
         var myinfo = window.localStorage.getItem("myInfo");
 
         var model = new app.models.MyInfo(goog.json.parse(myinfo));
-        app.views.myInfoShow.updateWithRecord(model);
+        app.views.myinfoShow.updateWithRecord(model);
         app.views.viewport.setActiveItem(
                 app.views.myinfoShow, null // options.animation
                 );
@@ -16,7 +16,7 @@ app.controllers.myinfo = new Ext.Controller({
     edit: function(options) {
         var myinfo = window.localStorage.getItem("myInfo");
         var model = new app.models.MyInfo(goog.json.parse(myinfo));
-        app.views.myInfoEdit.updateWithRecord(model);
+        app.views.myinfoEdit.updateWithRecord(model);
 
         app.views.viewport.setActiveItem(
                 app.views.myinfoEdit, null // options.animation

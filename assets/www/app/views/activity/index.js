@@ -1,4 +1,4 @@
-app.views.activityIndex = new Ext.extend(Ext.Panel, {
+app.views.ActivityIndex = Ext.extend(Ext.Panel, {
 
     dockedItems: [
         {

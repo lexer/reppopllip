@@ -1,168 +1,172 @@
 app.controllers.prescriptions = new Ext.Controller({
-            createModel:function(entity) {
-                return new app.models.Prescription({
-                            id: entity.id,
-                            name: entity.name,
-                            doctor_name: entity.doctor ? entity.doctor.name : "",
-                            doctor_id: entity.doctor ? entity.doctor.id : "",
-                            description: entity.description,
-                            quantity: entity.quantity
-                        });
-            },
-            index: function(options) {
-                var controller = this;
-                db.Prescription.all().prefetch("doctor").list(null, function(pills) {
-                    var models = [];
+    createModel:function(entity) {
+        return new app.models.Prescription({
+            id: entity.id,
+            name: entity.name,
+            doctor_name: entity.doctor ? entity.doctor.name : "",
+            doctor_id: entity.doctor ? entity.doctor.id : "",
+            description: entity.description,
+            quantity: entity.quantity
+        });
+    },
+    index: function(options) {
+        var controller = this;
 
-                    for (var i = 0; i < pills.length; i++) {
-                        models.push(controller.createModel(pills[i]));
-                    }
+        db.Prescription.all().prefetch("doctor").list(null, function(pills) {
+            var models = [];
 
-                    app.stores.prescriptions.loadData(models, false);
+            for (var i = 0; i < pills.length; i++) {
+                models.push(controller.createModel(pills[i]));
+            }
 
-                    app.views.viewport.setActiveItem(
-                           app.views.prescriptionsIndex, null // options.animation
+            app.stores.prescriptions.loadData(models, false);
+        });
+
+        app.views.viewport.setActiveItem(
+                app.views.prescriptionsIndex, null // options.animation
+                );
+    },
+    show: function(options) {
+        var id = options.id;
+        var controller = this;
+
+        db.Prescription.all().prefetch("doctor").filter("id", '=', id).one(function(prescription) {
+            var model = controller.createModel(prescription);
+            app.views.prescriptionsShow.updateWithRecord(model);
+            app.views.viewport.setActiveItem(
+                    app.views.prescriptionsShow, null // options.animation
                     );
+        });
+    },
+
+    edit: function(options) {
+        var id = options.id;
+        var controller = this;
+
+        db.Prescription.all().filter("id", '=', id).one(function(prescription) {
+            var model = controller.createModel(prescription);
+
+            db.Doctor.all().list(null, function(doctors) {
+                var doctorsSelect = $.map(doctors, function(d) {
+                    return {
+                        text: d.name,
+                        value: d.id };
                 });
-            },
-            show: function(options) {
-                var id = options.id;
-                var controller = this;
-
-                db.Prescription.all().prefetch("doctor").filter("id", '=', id).one(function(prescription) {
-                    var model = controller.createModel(prescription);
-                    app.views.prescriptionsShow.updateWithRecord(model);
-                    app.views.viewport.setActiveItem(
-                            app.views.prescriptionsShow, null // options.animation
-                    );
-                });
-            },
-
-            edit: function(options) {
-                var id = options.id;
-                var controller = this;
-
-                db.Prescription.all().filter("id", '=', id).one(function(prescription) {
-                    var model = controller.createModel(prescription);
-
-                    db.Doctor.all().list(null, function(doctors) {
-                        var doctorsSelect = $.map(doctors, function(d) {
-                            return {
-                                text: d.name,
-                                value: d.id };
-                        });
-                        app.views.prescriptionsEdit.updateWithRecord(model, doctorsSelect);
-                        app.views.viewport.setActiveItem(
-                                app.views.prescriptionsEdit, null // options.animation
+                app.views.prescriptionsEdit.updateWithRecord(model, doctorsSelect);
+                app.views.viewport.setActiveItem(
+                        app.views.prescriptionsEdit, null // options.animation
                         );
-                    });
-                });
-            },
+            });
+        });
+    },
 
-            update: function(options) {
-                var data = options.prescription.data;
+    update: function(options) {
+        var data = options.prescription.data;
 
-                db.Prescription.all().prefetch("doctor").filter("id", '=', data.id).one(function(prescription) {
-                    persistence.transaction(function(tx) {
-
-                        prescription.name = data.name;
-                        prescription.description = data.description;
-                        prescription.quantity = data.quantity;
-
-                        if (data.doctor_id) {
-                            db.Doctor.all().filter("id", '=', data.doctor_id).one(function(doctor) {
-
-                                prescription.doctor = doctor;
-                                persistence.flush(tx, function() {
-
-                                    Ext.dispatch({
-                                                controller: app.controllers.prescriptions,
-                                                action: 'show',
-                                                id: prescription.id,
-                                                animation: options.animation
-                                            });
-
-                                });
-
-                            });
-                        }
-                        else {
-                            persistence.flush(tx, function() {
-
-                                Ext.dispatch({
-                                            controller: app.controllers.prescriptions,
-                                            action: 'show',
-                                            id: prescription.id,
-                                            animation: options.animation
-                                        });
-
-                            });
-                        }
-                    });
-                });
-            },
-
-            add: function(options) {
-                db.Doctor.all().list(null, function(doctors) {
-                    var doctorsSelect = $.map(doctors, function(d) {
-                        return {
-                            text: d.name,
-                            value: d.id };
-                    });
-
-                    var prescription = new app.models.Prescription();
-
-                    app.views.prescriptionsEdit.updateWithRecord(prescription, doctorsSelect);
-                    app.views.viewport.setActiveItem(
-                            app.views.prescriptionsEdit, null // options.animation
-                    );
-                });
-            },
-
-            create: function(options) {
-                var data = options.prescription.data;
-
-                var prescription = new db.Prescription();
+        db.Prescription.all().prefetch("doctor").filter("id", '=', data.id).one(function(prescription) {
+            persistence.transaction(function(tx) {
 
                 prescription.name = data.name;
                 prescription.description = data.description;
                 prescription.quantity = data.quantity;
+                prescription.doctor = data.doctor_id;
 
-                if (data.doctor_id) {
-                    db.Doctor.all().filter("id", '=', data.doctor_id).one(function(doctor) {
-                        prescription.doctor = doctor;
-                        persistence.add(prescription);
+                persistence.flush(tx, function() {
 
-                        Ext.dispatch({
-                                    controller: app.controllers.prescriptions,
-                                    action: 'index',
-                                    animation: options.animation
-                                });
+                    Ext.dispatch({
+                        controller: app.controllers.prescriptions,
+                        action: 'show',
+                        id: prescription.id,
+                        animation: options.animation
                     });
-                }
-                else {
-                    persistence.add(prescription);
 
-                    Ext.dispatch({
-                                controller: app.controllers.prescriptions,
-                                action: 'index',
-                                animation: options.animation
-                            });
-                }
-
-            },
-
-            destroy: function(options) {
-                var id = options.id;
-
-                db.Prescription.all().filter("id", '=', id).one(function(prescription) {
-                    persistence.remove(prescription);
-
-                    Ext.dispatch({
-                                controller: app.controllers.prescriptions,
-                                action: 'index',
-                                animation: options.animation
-                            });
                 });
-            }
+//                        if (data.doctor_id) {
+//                            db.Doctor.all().filter("id", '=', data.doctor_id).one(function(doctor) {
+//
+//                                prescription.doctor = doctor;
+//                                persistence.flush(tx, function() {
+//
+//                                    Ext.dispatch({
+//                                                controller: app.controllers.prescriptions,
+//                                                action: 'show',
+//                                                id: prescription.id,
+//                                                animation: options.animation
+//                                            });
+//
+//                                });
+//
+//                            });
+//                        }
+//                        else {
+//
+//                        }
+            });
         });
+    },
+
+    add: function(options) {
+        db.Doctor.all().list(null, function(doctors) {
+            var doctorsSelect = $.map(doctors, function(d) {
+                return {
+                    text: d.name,
+                    value: d.id };
+            });
+
+            var prescription = new app.models.Prescription();
+
+            app.views.prescriptionsEdit.updateWithRecord(prescription, doctorsSelect);
+            app.views.viewport.setActiveItem(
+                    app.views.prescriptionsEdit, null // options.animation
+                    );
+        });
+    },
+
+    create: function(options) {
+        var data = options.prescription.data;
+
+        var prescription = new db.Prescription();
+
+        prescription.name = data.name;
+        prescription.description = data.description;
+        prescription.quantity = data.quantity;
+        prescription.doctor = data.doctor_id;
+
+//        if (data.doctor_id) {
+//            db.Doctor.all().filter("id", '=', data.doctor_id).one(function(doctor) {
+//                prescription.doctor = doctor;
+//                persistence.add(prescription);
+//
+//                Ext.dispatch({
+//                    controller: app.controllers.prescriptions,
+//                    action: 'index',
+//                    animation: options.animation
+//                });
+//            });
+//        }
+//        else {
+        persistence.add(prescription);
+
+        Ext.dispatch({
+            controller: app.controllers.prescriptions,
+            action: 'index',
+            animation: options.animation
+        });
+//        }
+
+    },
+
+    destroy: function(options) {
+        var id = options.id;
+
+        db.Prescription.all().filter("id", '=', id).one(function(prescription) {
+            persistence.remove(prescription);
+
+            Ext.dispatch({
+                controller: app.controllers.prescriptions,
+                action: 'index',
+                animation: options.animation
+            });
+        });
+    }
+});

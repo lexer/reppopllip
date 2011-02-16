@@ -62,18 +62,18 @@ app.views.Viewport = Ext.extend(Ext.Panel, {
         })
     ],
     fullscreen: true,
-    layout: 'card',
-    items: [
-        app.views.activityIndex,
-        app.views.doctorsIndex,
-        app.views.doctorsShow,
-        app.views.doctorsEdit,
-        app.views.prescriptionsIndex,
-        app.views.prescriptionsShow,
-        app.views.prescriptionsEdit,
-        app.views.myInfoShow,
-        app.views.myInfoEdit
-    ]
+    layout: 'card'//,
+//    items: [
+//        app.views.activityIndex,
+//        app.views.doctorsIndex,
+//        app.views.doctorsShow,
+//        app.views.doctorsEdit,
+//        app.views.prescriptionsIndex,
+//        app.views.prescriptionsShow,
+//        app.views.prescriptionsEdit,
+//        app.views.myInfoShow,
+//        app.views.myInfoEdit
+//    ]
     //   initComponent: function() {
 
 

@@ -11,7 +11,9 @@ app.controllers.doctors = new Ext.Controller({
     },
 
     index: function(options) {
+
         var controller = this;
+
         db.Doctor.all().list(null, function(doctors) {
             var models = [];
 
@@ -20,11 +22,11 @@ app.controllers.doctors = new Ext.Controller({
             }
 
             app.stores.doctors.loadData(models, false);
-
-            app.views.viewport.setActiveItem(
-                    app.views.doctorsIndex, null // options.animation
-                    );
         });
+
+        app.views.viewport.setActiveItem(
+                app.views.doctorsIndex, null // options.animation
+                );
     },
     show: function(options) {
         var id = options.id;
