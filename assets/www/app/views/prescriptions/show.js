@@ -52,6 +52,7 @@ app.views.PrescriptionsShow = Ext.extend(Ext.Panel, {
         Ext.each(this.items.items, function(item) {
             item.update(record.data);
         });
+
         var toolbar = this.getDockedItems()[0];
         toolbar.setTitle(record.get('name'));
         toolbar.getComponent('edit_prescription').record = record;

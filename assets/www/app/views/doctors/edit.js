@@ -3,7 +3,7 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
     dockedItems: [
         {
             xtype: 'toolbar',
-            title: 'Edit doctor',
+            title: 'Add doctor',
             items: [
                 {
                     id: 'cancel_edit_doctor',
@@ -66,29 +66,40 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
             submitOnAction: false,
             items: [
                 {
-                    name : 'name',
-                    label: 'Name',
-                    xtype: 'textfield'
+                    xtype: 'textfield',
+                    placeHolder: "John Doe",
+                    name: 'name',
+                    label: 'Name'
                 },
                 {
-                    name : 'address',
-                    label: 'Address',
-                    xtype: 'textfield'
+                    xtype: 'textfield',
+                    placeHolder: '111, Lawrence Street..',
+                    name: 'address',
+                    label: 'Address'
                 },
                 {
-                    name : 'city',
-                    label: 'City',
-                    xtype: 'textfield'
+                    xtype: 'textfield',
+                    placeHolder: 'New York',
+                    name: 'city',
+                    label: 'City'
                 },
                 {
-                    name : 'state',
-                    label: 'State',
-                    xtype: 'textfield'
+                    xtype: 'textfield',
+                    placeHolder: 'NY',
+                    name: 'state',
+                    label: 'State'
                 },
                 {
-                    name : 'phone',
-                    label: 'Phone',
-                    xtype: 'textfield'
+                    xtype: 'textfield',
+                    placeHolder: '000-000-0000',
+                    name: 'phone',
+                    label: 'Phone'
+                },
+                {
+                    xtype: 'emailfield',
+                    placeHolder: "john@doe.com",
+                    name: 'email',
+                    label: 'Email'
                 }
             ]
         },
@@ -118,10 +129,22 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
     updateWithRecord: function(record) {
         var form = this.getComponent('form');
         form.load(record);
+
+        var deleteBtn = this.getComponent('delete_doctor');
+
         var toolbar = this.getDockedItems()[0];
-        this.getComponent('delete_doctor').record = record;
+
         toolbar.getComponent('cancel_edit_doctor').record = record;
         toolbar.getComponent('save_doctor').record = record;
         toolbar.getComponent('save_doctor').form = form;
+
+        if (record.getId()) {
+            toolbar.setTitle(record.get('name'));
+            deleteBtn.record = record;
+            deleteBtn.show();
+        }
+        else {
+            deleteBtn.hide();
+        }
     }
 });

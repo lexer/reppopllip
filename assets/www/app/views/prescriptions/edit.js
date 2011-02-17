@@ -3,7 +3,7 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
     dockedItems: [
         {
             xtype: 'toolbar',
-            title: 'Edit prescription',
+            title: 'Add prescription',
             items: [
                 {
                     id: 'cancel_edit_prescription',
@@ -67,11 +67,13 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
             items: [
                 {
                     name : 'name',
+                    placeHolder: "Flexril",
                     label: 'Name',
                     xtype: 'textfield'
                 },
                 {
                     name : 'description',
+                    placeHolder: "For the nerve pain..",
                     label: 'Description',
                     xtype: 'textfield'
                 },
@@ -117,10 +119,22 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
         var form = this.getComponent('form');
         this.query('#doctorsSelect')[0].setOptions(doctors, false);
         form.load(record);
+
+        var deleteBtn = this.getComponent('delete_prescription');
+
         var toolbar = this.getDockedItems()[0];
-        this.getComponent('delete_prescription').record = record;
+
         toolbar.getComponent('cancel_edit_prescription').record = record;
         toolbar.getComponent('save_prescription').record = record;
         toolbar.getComponent('save_prescription').form = form;
+
+        if (record.getId()) {
+            toolbar.setTitle(record.get('name'));
+            deleteBtn.record = record;
+            deleteBtn.show();
+        }
+        else {
+            deleteBtn.hide();
+        }
     }
 });

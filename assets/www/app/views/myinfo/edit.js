@@ -58,21 +58,25 @@ app.views.MyinfoEdit = Ext.extend(Ext.Panel, {
                         },
                         {
                             xtype: 'textfield',
+                            placeHolder: '111, Lawrence Street..',
                             name: 'address',
                             label: 'Address'
                         },
                         {
                             xtype: 'textfield',
+                            placeHolder: 'New York',
                             name: 'city',
                             label: 'City'
                         },
                         {
                             xtype: 'textfield',
+                            placeHolder: 'NY',
                             name: 'state',
                             label: 'State'
                         },
                         {
                             xtype: 'textfield',
+                            placeHolder: '000-000-0000',                            
                             name: 'phone',
                             label: 'Phone'
                         },
@@ -96,21 +100,25 @@ app.views.MyinfoEdit = Ext.extend(Ext.Panel, {
                         },
                         {
                             xtype: 'textfield',
+                            placeHolder: '111, Lawrence Street..',
                             name: 'emergency_address',
                             label: 'Address'
                         },
                         {
                             xtype: 'textfield',
+                            placeHolder: 'New York',
                             name: 'emergency_city',
                             label: 'City'
                         },
                         {
                             xtype: 'textfield',
+                            placeHolder: 'NY',
                             name: 'emergency_state',
                             label: 'State'
                         },
                         {
                             xtype: 'textfield',
+                            placeHolder: '000-000-0000',
                             name: 'emergency_phone',
                             label: 'Phone'
                         },
