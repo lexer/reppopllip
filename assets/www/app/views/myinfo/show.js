@@ -7,7 +7,6 @@ app.views.MyinfoShow = Ext.extend(Ext.Panel, {
             items: [
                 {xtype:'spacer'},
                 {
-                    id:'edit',
                     text: 'Edit',
                     ui: 'action',
                     listeners: {
@@ -24,6 +23,7 @@ app.views.MyinfoShow = Ext.extend(Ext.Panel, {
         }
     ],
     layout: 'fit',
+    scroll: 'vertical',
     styleHtmlContent:true,
     items: [
         {

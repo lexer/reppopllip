@@ -58,8 +58,7 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
             ]
         }
     ],
-    submitOnAction: false,
-    layout: 'fit',
+    scroll: 'vertical',
     items: [
         {
             id: 'form',

@@ -20,7 +20,7 @@ app.views.PrescriptionsShow = Ext.extend(Ext.Panel, {
                 },
                 {xtype:'spacer'},
                 {
-                    id: 'edit',
+                    id: 'edit_prescription',
                     text: 'Edit',
                     ui: 'action',
                     listeners: {
@@ -41,7 +41,7 @@ app.views.PrescriptionsShow = Ext.extend(Ext.Panel, {
     layout: 'fit',
     items: [
         {
-            tpl:                    ['<h4>{name}</h4>',
+            tpl: ['<h4>{name}</h4>',
                 '<p>{description}</p>',
                 '<p>{quantity}</p>',
                 '<p>{doctor_name}</p>'
@@ -54,6 +54,6 @@ app.views.PrescriptionsShow = Ext.extend(Ext.Panel, {
         });
         var toolbar = this.getDockedItems()[0];
         toolbar.setTitle(record.get('name'));
-        toolbar.getComponent('edit').record = record;
+        toolbar.getComponent('edit_prescription').record = record;
     }
 });

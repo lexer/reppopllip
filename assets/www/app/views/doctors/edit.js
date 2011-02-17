@@ -41,13 +41,15 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
                                 Ext.dispatch({
                                     controller: app.controllers.doctors,
                                     action: 'update',
-                                    doctor: this.record
+                                    doctor: this.record,
+                                    animation: {type:'slide', direction:'right'}
                                 });
                             } else {
                                 Ext.dispatch({
                                     controller: app.controllers.doctors,
                                     action: 'create',
-                                    doctor: this.record
+                                    doctor: this.record,
+                                    animation: {type:'slide', direction:'right'}
                                 });
                             }
                         }
@@ -56,8 +58,7 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
             ]
         }
     ],
-    submitOnAction: false,
-    layout: 'fit',
+    scroll: 'vertical',
     items: [
         {
             id: 'form',
