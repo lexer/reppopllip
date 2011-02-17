@@ -23,7 +23,6 @@ app.views.PrescriptionsIndex = Ext.extend(Ext.Panel, {
                 }
             ]
         }
-
     ],
     layout: 'fit',
     styleHtmlContent:true,
