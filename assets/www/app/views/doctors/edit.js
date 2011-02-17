@@ -6,7 +6,7 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
             title: 'Edit doctor',
             items: [
                 {
-                    id: 'cancel',
+                    id: 'cancel_edit_doctor',
                     text: 'Cancel',
                     ui: 'back',
                     listeners: {
@@ -30,8 +30,8 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
                 },
                 {xtype:'spacer'},
                 {
-                    id: 'apply',
-                    text: 'Apply',
+                    id: 'save_doctor',
+                    text: 'Save',
                     ui: 'action',
                     listeners: {
                         'tap': function () {
@@ -93,7 +93,7 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
         },
         {
             xtype:'button',
-            id  : 'delete',
+            id  : 'delete_doctor',
             ui:  'decline',
             text: 'Delete',
             handler: function() {
@@ -118,9 +118,9 @@ app.views.DoctorsEdit = Ext.extend(Ext.Panel, {
         var form = this.getComponent('form');
         form.load(record);
         var toolbar = this.getDockedItems()[0];
-        this.getComponent('delete').record = record;
-        toolbar.getComponent('cancel').record = record;
-        toolbar.getComponent('apply').record = record;
-        toolbar.getComponent('apply').form = form;
+        this.getComponent('delete_doctor').record = record;
+        toolbar.getComponent('cancel_edit_doctor').record = record;
+        toolbar.getComponent('save_doctor').record = record;
+        toolbar.getComponent('save_doctor').form = form;
     }
 });

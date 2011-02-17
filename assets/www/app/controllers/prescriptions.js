@@ -20,11 +20,11 @@ app.controllers.prescriptions = new Ext.Controller({
             }
 
             app.stores.prescriptions.loadData(models, false);
-        });
 
-        app.views.viewport.setActiveItem(
-                app.views.prescriptionsIndex, null // options.animation
-                );
+            app.views.viewport.setActiveItem(
+                    app.views.prescriptionsIndex, options.animation
+                    );
+        });
     },
     show: function(options) {
         var id = options.id;
@@ -34,7 +34,7 @@ app.controllers.prescriptions = new Ext.Controller({
             var model = controller.createModel(prescription);
             app.views.prescriptionsShow.updateWithRecord(model);
             app.views.viewport.setActiveItem(
-                    app.views.prescriptionsShow, null // options.animation
+                    app.views.prescriptionsShow, options.animation
                     );
         });
     },
@@ -54,7 +54,7 @@ app.controllers.prescriptions = new Ext.Controller({
                 });
                 app.views.prescriptionsEdit.updateWithRecord(model, doctorsSelect);
                 app.views.viewport.setActiveItem(
-                        app.views.prescriptionsEdit, null // options.animation
+                        app.views.prescriptionsEdit, options.animation
                         );
             });
         });
@@ -81,26 +81,6 @@ app.controllers.prescriptions = new Ext.Controller({
                     });
 
                 });
-//                        if (data.doctor_id) {
-//                            db.Doctor.all().filter("id", '=', data.doctor_id).one(function(doctor) {
-//
-//                                prescription.doctor = doctor;
-//                                persistence.flush(tx, function() {
-//
-//                                    Ext.dispatch({
-//                                                controller: app.controllers.prescriptions,
-//                                                action: 'show',
-//                                                id: prescription.id,
-//                                                animation: options.animation
-//                                            });
-//
-//                                });
-//
-//                            });
-//                        }
-//                        else {
-//
-//                        }
             });
         });
     },
@@ -117,7 +97,7 @@ app.controllers.prescriptions = new Ext.Controller({
 
             app.views.prescriptionsEdit.updateWithRecord(prescription, doctorsSelect);
             app.views.viewport.setActiveItem(
-                    app.views.prescriptionsEdit, null // options.animation
+                    app.views.prescriptionsEdit, options.animation
                     );
         });
     },
@@ -132,19 +112,6 @@ app.controllers.prescriptions = new Ext.Controller({
         prescription.quantity = data.quantity;
         prescription.doctor = data.doctor_id;
 
-//        if (data.doctor_id) {
-//            db.Doctor.all().filter("id", '=', data.doctor_id).one(function(doctor) {
-//                prescription.doctor = doctor;
-//                persistence.add(prescription);
-//
-//                Ext.dispatch({
-//                    controller: app.controllers.prescriptions,
-//                    action: 'index',
-//                    animation: options.animation
-//                });
-//            });
-//        }
-//        else {
         persistence.add(prescription);
 
         Ext.dispatch({

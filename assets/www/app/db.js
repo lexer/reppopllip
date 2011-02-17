@@ -6,7 +6,7 @@ var db = {
     init: function(callback) {
         persistence.store.websql.config(persistence, 'pillpopper', 'pill popper database', 5 * 1024 * 1024);
 
-        //persistence.reset();
+        persistence.reset();
 
         this.Doctor = persistence.define('Doctor', {
                     name: "TEXT",

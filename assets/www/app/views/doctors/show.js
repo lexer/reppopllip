@@ -20,7 +20,7 @@ app.views.DoctorsShow = Ext.extend(Ext.Panel, {
                 },
                 {xtype:'spacer'},
                 {
-                    id: 'edit',
+                    id: 'edit_doctor',
                     text: 'Edit',
                     ui: 'action',
                     listeners: {
@@ -42,7 +42,7 @@ app.views.DoctorsShow = Ext.extend(Ext.Panel, {
     layout: 'fit',
     items: [
         {
-            id: 'details',
+            id: 'doctor_details',
             tpl:[
                 '<h4>{name}</h4>',
                 '<p>{address}</p>',
@@ -52,9 +52,9 @@ app.views.DoctorsShow = Ext.extend(Ext.Panel, {
 
     ],
     updateWithRecord: function(record) {
-        this.getComponent('details').update(record.data);
+        this.getComponent('doctor_details').update(record.data);
         var toolbar = this.getDockedItems()[0];
         toolbar.setTitle(record.get('name'));
-        toolbar.getComponent('edit').record = record;
+        toolbar.getComponent('edit_doctor').record = record;
     }
 });

@@ -6,7 +6,7 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
             title: 'Edit prescription',
             items: [
                 {
-                    id: 'cancel',
+                    id: 'cancel_edit_prescription',
                     text: 'Cancel',
                     ui: 'back',
                     listeners: {
@@ -30,8 +30,8 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
                 },
                 {xtype:'spacer'},
                 {
-                    id: 'apply',
-                    text: 'Apply',
+                    id: 'save_prescription',
+                    text: 'Save',
                     ui: 'action',
                     listeners: {
                         'tap': function () {
@@ -92,7 +92,7 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
         },
         {
             xtype:'button',
-            id  : 'delete',
+            id  : 'delete_prescription',
             ui:  'decline',
             text: 'Delete',
             handler: function() {
@@ -119,9 +119,9 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
         this.query('#doctorsSelect')[0].setOptions(doctors, false);
         form.load(record);
         var toolbar = this.getDockedItems()[0];
-        this.getComponent('delete').record = record;
-        toolbar.getComponent('cancel').record = record;
-        toolbar.getComponent('apply').record = record;
-        toolbar.getComponent('apply').form = form;
+        this.getComponent('delete_prescription').record = record;
+        toolbar.getComponent('cancel_edit_prescription').record = record;
+        toolbar.getComponent('save_prescription').record = record;
+        toolbar.getComponent('save_prescription').form = form;
     }
 });

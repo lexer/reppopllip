@@ -5,8 +5,6 @@ app.views.ActivityIndex = Ext.extend(Ext.Panel, {
             xtype: 'toolbar',
             title: 'Activity',
             items: [
-                {xtype:'spacer'},
-                {xtype:'spacer'},
                 {xtype:'spacer'}
             ]
         }

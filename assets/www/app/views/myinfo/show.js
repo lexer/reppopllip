@@ -6,7 +6,6 @@ app.views.MyinfoShow = Ext.extend(Ext.Panel, {
             title: 'My info',
             items: [
                 {xtype:'spacer'},
-                {xtype:'spacer'},
                 {
                     id:'edit',
                     text: 'Edit',

@@ -8,7 +8,7 @@ app.controllers.myinfo = new Ext.Controller({
         var model = new app.models.MyInfo(goog.json.parse(myinfo));
         app.views.myinfoShow.updateWithRecord(model);
         app.views.viewport.setActiveItem(
-                app.views.myinfoShow, null // options.animation
+                app.views.myinfoShow, options.animation
                 );
 
     },
@@ -19,7 +19,7 @@ app.controllers.myinfo = new Ext.Controller({
         app.views.myinfoEdit.updateWithRecord(model);
 
         app.views.viewport.setActiveItem(
-                app.views.myinfoEdit, null // options.animation
+                app.views.myinfoEdit, options.animation
                 );
     },
 

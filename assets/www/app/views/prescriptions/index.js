@@ -6,7 +6,6 @@ app.views.PrescriptionsIndex = Ext.extend(Ext.Panel, {
             title: 'Prescriptions',
             items: [
                 {xtype:'spacer'},
-                {xtype:'spacer'},
                 {
 
                     id: 'add',

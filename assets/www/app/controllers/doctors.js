@@ -22,11 +22,11 @@ app.controllers.doctors = new Ext.Controller({
             }
 
             app.stores.doctors.loadData(models, false);
-        });
 
-        app.views.viewport.setActiveItem(
-                app.views.doctorsIndex, null // options.animation
-                );
+            app.views.viewport.setActiveItem(
+                    app.views.doctorsIndex, options.animation
+                    );
+        });
     },
     show: function(options) {
         var id = options.id;
@@ -36,7 +36,7 @@ app.controllers.doctors = new Ext.Controller({
             var model = controller.createModel(doctor);
             app.views.doctorsShow.updateWithRecord(model);
             app.views.viewport.setActiveItem(
-                    app.views.doctorsShow, null // options.animation
+                    app.views.doctorsShow, options.animation
                     );
         });
     },
@@ -49,7 +49,7 @@ app.controllers.doctors = new Ext.Controller({
             var model = controller.createModel(doctor);
             app.views.doctorsEdit.updateWithRecord(model);
             app.views.viewport.setActiveItem(
-                    app.views.doctorsEdit, null // options.animation
+                    app.views.doctorsEdit, options.animation
                     );
         });
     },
@@ -83,7 +83,7 @@ app.controllers.doctors = new Ext.Controller({
         var doctor = new app.models.Doctor();
         app.views.doctorsEdit.updateWithRecord(doctor);
         app.views.viewport.setActiveItem(
-                app.views.doctorsEdit, null // options.animation
+                app.views.doctorsEdit, options.animation
                 );
     } ,
     create: function(options) {

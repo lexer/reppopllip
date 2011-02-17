@@ -6,7 +6,6 @@ app.views.MyinfoEdit = Ext.extend(Ext.Panel, {
             title: 'My Info',
             items: [
                 {
-                    id: 'cancel',
                     text: 'Cancel',
                     ui: 'back',
                     listeners: {
@@ -21,7 +20,7 @@ app.views.MyinfoEdit = Ext.extend(Ext.Panel, {
                 },
                 {xtype:'spacer'},
                 {
-                    id: 'save',
+                    id: 'save_myinfo',
                     text: 'Save',
                     ui: 'action',
                     listeners: {
@@ -42,7 +41,7 @@ app.views.MyinfoEdit = Ext.extend(Ext.Panel, {
     styleHtmlContent:false,
     items: [
         {
-            id: 'my_contact_info',
+            id: 'myinfo_form',
             xtype: 'form',
             submitOnAction: false,
             scroll: "vertical",
@@ -127,11 +126,11 @@ app.views.MyinfoEdit = Ext.extend(Ext.Panel, {
         }
     ],
     updateWithRecord: function(myinfo) {
-        var form = this.getComponent('my_contact_info');
+        var form = this.getComponent('myinfo_form');
         form.load(myinfo)
 
         var toolbar = this.getDockedItems()[0];
-        toolbar.getComponent('save').record = myinfo;
-        toolbar.getComponent('save').form = form;
+        toolbar.getComponent('save_myinfo').record = myinfo;
+        toolbar.getComponent('save_myinfo').form = form;
     }
 });
