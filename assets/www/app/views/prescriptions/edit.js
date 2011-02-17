@@ -84,6 +84,7 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
                 },
                 {
                     id: 'doctorsSelect',
+                    placeHolder: 'Select doctor',
                     name : 'doctor_id',
                     label: 'Doctor',
                     xtype: 'selectfield',
@@ -117,7 +118,19 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
     ,
     updateWithRecord: function(record, doctors) {
         var form = this.getComponent('form');
-        this.query('#doctorsSelect')[0].setOptions(doctors, false);
+        var doctorsSelect = this.query('#doctorsSelect')[0];
+
+        if (doctors.length < 1)
+        {
+            doctorsSelect.disable();
+            doctorsSelect.placeHolder = "You haven't added doctor yet";
+            doctorsSelect.setOptions(doctors, false);
+        }
+        else {
+             doctorsSelect.enable();
+             doctorsSelect.placeHolder = "Select doctor";
+             doctorsSelect.setOptions(doctors, false);
+        }
         form.load(record);
 
         var deleteBtn = this.getComponent('delete_prescription');

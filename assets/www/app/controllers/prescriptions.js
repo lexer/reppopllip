@@ -53,8 +53,6 @@ app.controllers.prescriptions = new Ext.Controller({
                         value: d.id };
                 });
 
-                doctorsSelect.push({text: "None", value: null});
-
                 app.views.prescriptionsEdit.updateWithRecord(model, doctorsSelect);
                 app.views.viewport.setActiveItem(
                         app.views.prescriptionsEdit, options.animation
@@ -97,10 +95,7 @@ app.controllers.prescriptions = new Ext.Controller({
                     value: d.id };
             });
 
-            doctorsSelect.push({text: "None", value: null});
-            
             var prescription = new app.models.Prescription();
-            prescription.set('quantity',1);
 
             app.views.prescriptionsEdit.updateWithRecord(prescription, doctorsSelect);
             app.views.viewport.setActiveItem(

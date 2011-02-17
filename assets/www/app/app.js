@@ -1,5 +1,6 @@
 Ext.regApplication({
     name: 'app',
+    version: '0.1.1',
     launch: function() {
         var that = this;
         this.launched = true;
@@ -7,8 +8,8 @@ Ext.regApplication({
         console.log('Launched');
 
         db.init(function() {
-            //db.seed();
-        
+
+
             Ext.apply(app.views, {
                 doctorsIndex: new app.views.DoctorsIndex(),
                 doctorsShow: new app.views.DoctorsShow(),
