@@ -52,6 +52,9 @@ app.controllers.prescriptions = new Ext.Controller({
                         text: d.name,
                         value: d.id };
                 });
+
+                doctorsSelect.push({text: "None", value: null});
+
                 app.views.prescriptionsEdit.updateWithRecord(model, doctorsSelect);
                 app.views.viewport.setActiveItem(
                         app.views.prescriptionsEdit, options.animation
@@ -87,13 +90,17 @@ app.controllers.prescriptions = new Ext.Controller({
 
     add: function(options) {
         db.Doctor.all().list(null, function(doctors) {
+            
             var doctorsSelect = $.map(doctors, function(d) {
                 return {
                     text: d.name,
                     value: d.id };
             });
 
+            doctorsSelect.push({text: "None", value: null});
+            
             var prescription = new app.models.Prescription();
+            prescription.set('quantity',1);
 
             app.views.prescriptionsEdit.updateWithRecord(prescription, doctorsSelect);
             app.views.viewport.setActiveItem(
