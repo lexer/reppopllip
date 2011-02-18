@@ -43,9 +43,10 @@ app.views.PrescriptionsShow = Ext.extend(Ext.Panel, {
         {
             tpl: ['<h4>{name}</h4>',
                 '<p>{description}</p>',
-                '<p>{quantity}</p>',
-                '<p>{doctor_name}</p>'
-            ]
+                '<p>Take: {frequency_name}</p>',
+                '<p>Quantity: {quantity}</p>',
+                '<p>Doctor: {doctor_name}</p>']
+
         }
     ],
     updateWithRecord: function(record) {

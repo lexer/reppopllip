@@ -10,7 +10,6 @@ app.controllers.myinfo = new Ext.Controller({
         app.views.viewport.setActiveItem(
                 app.views.myinfoShow, options.animation
                 );
-
     },
 
     edit: function(options) {

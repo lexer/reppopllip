@@ -1,12 +1,16 @@
 app.controllers.prescriptions = new Ext.Controller({
     createModel:function(entity) {
+
         return new app.models.Prescription({
             id: entity.id,
             name: entity.name,
             doctor_name: entity.doctor ? entity.doctor.name : "",
             doctor_id: entity.doctor ? entity.doctor.id : "",
             description: entity.description,
-            quantity: entity.quantity
+            quantity: entity.quantity,
+            taken: entity.taken,
+            frequency: entity.frequency,
+            frequency_name: app.stores.frequencies.getByValue(entity.frequency).text
         });
     },
     index: function(options) {
@@ -46,14 +50,17 @@ app.controllers.prescriptions = new Ext.Controller({
         db.Prescription.all().filter("id", '=', id).one(function(prescription) {
             var model = controller.createModel(prescription);
 
-            db.Doctor.all().list(null, function(doctors) {
-                var doctorsSelect = $.map(doctors, function(d) {
+            db.Doctor.all().list(null, function(ds) {
+                var doctors = _.map(ds, function(d) {
                     return {
                         text: d.name,
                         value: d.id };
                 });
 
-                app.views.prescriptionsEdit.updateWithRecord(model, doctorsSelect);
+                var frequencies = app.stores.frequencies.clone();
+
+
+                app.views.prescriptionsEdit.updateWithRecord(model, doctors, frequencies);
                 app.views.viewport.setActiveItem(
                         app.views.prescriptionsEdit, options.animation
                         );
@@ -61,7 +68,7 @@ app.controllers.prescriptions = new Ext.Controller({
         });
     },
 
-    update: function(options) {
+    update: function(options){
         var data = options.prescription.data;
 
         db.Prescription.all().prefetch("doctor").filter("id", '=', data.id).one(function(prescription) {
@@ -71,6 +78,8 @@ app.controllers.prescriptions = new Ext.Controller({
                 prescription.description = data.description;
                 prescription.quantity = data.quantity;
                 prescription.doctor = data.doctor_id;
+                prescription.frequency = data.frequency;
+                prescription.taken = new Date();
 
                 persistence.flush(tx, function() {
 
@@ -87,9 +96,9 @@ app.controllers.prescriptions = new Ext.Controller({
     },
 
     add: function(options) {
-        db.Doctor.all().list(null, function(doctors) {
-            
-            var doctorsSelect = $.map(doctors, function(d) {
+        db.Doctor.all().list(null, function(ds) {
+
+            var doctors = _.map(ds, function(d) {
                 return {
                     text: d.name,
                     value: d.id };
@@ -97,7 +106,9 @@ app.controllers.prescriptions = new Ext.Controller({
 
             var prescription = new app.models.Prescription();
 
-            app.views.prescriptionsEdit.updateWithRecord(prescription, doctorsSelect);
+            var frequencies = app.stores.frequencies.clone();
+
+            app.views.prescriptionsEdit.updateWithRecord(prescription, doctors, frequencies);
             app.views.viewport.setActiveItem(
                     app.views.prescriptionsEdit, options.animation
                     );
@@ -113,6 +124,7 @@ app.controllers.prescriptions = new Ext.Controller({
         prescription.description = data.description;
         prescription.quantity = data.quantity;
         prescription.doctor = data.doctor_id;
+        prescription.frequency = data.frequency;
 
         persistence.add(prescription);
 
@@ -121,8 +133,6 @@ app.controllers.prescriptions = new Ext.Controller({
             action: 'index',
             animation: options.animation
         });
-//        }
-
     },
 
     destroy: function(options) {

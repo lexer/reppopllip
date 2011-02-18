@@ -83,7 +83,15 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
                     xtype: 'numberfield'
                 },
                 {
-                    id: 'doctorsSelect',
+                    id: 'frequencies_select',
+                    placeHolder: 'Select frequency',
+                    name : 'frequency',
+                    label: 'Frequency',
+                    xtype: 'selectfield',
+                    modal: true
+                },
+                {
+                    id: 'doctors_select',
                     placeHolder: 'Select doctor',
                     name : 'doctor_id',
                     label: 'Doctor',
@@ -114,11 +122,15 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
 
             }
         }
-    ]
-    ,
-    updateWithRecord: function(record, doctors) {
+    ],
+    updateWithRecord: function(record, doctors, frequencies) {
         var form = this.getComponent('form');
-        var doctorsSelect = this.query('#doctorsSelect')[0];
+        var doctorsSelect = form.getComponent('doctors_select');
+        var frequenciesSelect = form.getComponent('frequencies_select');
+
+        frequenciesSelect.setOptions(frequencies, false);
+//
+//        frequenciesSelect.setOptions();
 
         if (doctors.length < 1)
         {

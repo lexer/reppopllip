@@ -33,8 +33,9 @@ app.views.PrescriptionsIndex = Ext.extend(Ext.Panel, {
             itemTpl:
                     ['<h4>{name}</h4>',
                         '<p>{description}</p>',
-                        '<p>{quantity}</p>',
-                        '<p>{doctor_name}</p>'
+                        '<p>Take: {frequency_name}</p>',
+                        '<p>Quantity: {quantity}</p>',
+                        '<p>Doctor: {doctor_name}</p>'
                     ],
             onItemDisclosure: function (record) {
                 Ext.dispatch({

@@ -26,7 +26,9 @@ var db = {
         this.Prescription = persistence.define('Prescription', {
             name: "TEXT",
             description: "TEXT",
-            quantity: "INT"
+            quantity: "INT",
+            frequency: "INT",
+            taken: "DATE"
         });
 
         this.Doctor.hasMany('prescriptions', this.Prescription, 'doctor');
