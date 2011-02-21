@@ -58,11 +58,11 @@ app.stores.frequencies = {
             hourCount = 2;
         }
 
-        if (frequencyValue == 1) {
+        if (frequencyValue == 2) {
             hourCount = 3;
         }
 
-        if (frequencyValue == 1) {
+        if (frequencyValue == 3) {
             hourCount = 4;
         }
         
