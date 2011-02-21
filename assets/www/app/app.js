@@ -1,6 +1,8 @@
-Ext.regApplication({
+//goog.provide('app');
+
+var app = Ext.regApplication({
     name: 'app',
-    version: '0.1.1',
+    version: '0.1.2',
     launch: function() {
         var that = this;
         this.launched = true;

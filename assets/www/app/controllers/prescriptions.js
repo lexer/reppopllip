@@ -1,18 +1,4 @@
 app.controllers.prescriptions = new Ext.Controller({
-    createModel:function(entity) {
-
-        return new app.models.Prescription({
-            id: entity.id,
-            name: entity.name,
-            doctor_name: entity.doctor ? entity.doctor.name : "",
-            doctor_id: entity.doctor ? entity.doctor.id : "",
-            description: entity.description,
-            quantity: entity.quantity,
-            taken: entity.taken,
-            frequency: entity.frequency,
-            frequency_name: app.stores.frequencies.getByValue(entity.frequency).text
-        });
-    },
     index: function(options) {
         var controller = this;
 
@@ -20,7 +6,7 @@ app.controllers.prescriptions = new Ext.Controller({
             var models = [];
 
             for (var i = 0; i < pills.length; i++) {
-                models.push(controller.createModel(pills[i]));
+                models.push(app.models.Prescription.createFromEntity(pills[i]));
             }
 
             app.stores.prescriptions.loadData(models, false);
@@ -48,7 +34,7 @@ app.controllers.prescriptions = new Ext.Controller({
         var controller = this;
 
         db.Prescription.all().filter("id", '=', id).one(function(prescription) {
-            var model = controller.createModel(prescription);
+            var model = app.models.Prescription.createFromEntity(prescription);
 
             db.Doctor.all().list(null, function(ds) {
                 var doctors = _.map(ds, function(d) {

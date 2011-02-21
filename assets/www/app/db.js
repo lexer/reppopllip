@@ -28,6 +28,7 @@ var db = {
             description: "TEXT",
             quantity: "INT",
             frequency: "INT",
+            created: "DATE",
             taken: "DATE"
         });
 

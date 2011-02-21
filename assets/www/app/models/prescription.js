@@ -8,6 +8,8 @@ app.models.Prescription = Ext.regModel("app.models.Prescription", {
         {name: 'doctor_name', type: 'string'},
         {name: 'frequency_name', type: 'string'},
         {name: 'frequency', type: 'integer'},
+        {name: 'created', type: 'date'},
+        {name: 'next_time', type: 'date'},
         {name: 'taken', type: 'date'}
     ]
 
@@ -19,17 +21,63 @@ app.models.Prescription = Ext.regModel("app.models.Prescription", {
 //            }
 });
 
+app.models.Prescription.createFromEntity = function(entity) {
+    return new app.models.Prescription({
+        id: entity.id,
+        name: entity.name,
+        doctor_name: entity.doctor ? entity.doctor.name : "",
+        doctor_id: entity.doctor ? entity.doctor.id : "",
+        description: entity.description,
+        quantity: entity.quantity,
+        taken: entity.taken,
+        frequency: entity.frequency,
+        frequency_name: app.stores.frequencies.getByValue(entity.frequency).text,
+        take: app.stores.frequencies.getTakeDate(entity, entity.frequency)
+    });
+}
+
 app.stores.frequencies = {
     items: [
-        {value:0, text: "1 Times per Day"},
-        {value:1, text: "2 Times per Day"},
-        {value:2, text: "3 Times per Day"},
-        {value:3, text: "4 Times per Day"},
-        {value:4, text: "Every 1 Hours"},
-        {value:5, text: "Every 2 Hours"},
-        {value:6, text: "Every 3 Hours"},
-        {value:7, text: "Every 4 Hours"}
+//        {value:0, text: "1 Times per Day" },
+//        {value:1, text: "2 Times per Day"},
+//        {value:2, text: "3 Times per Day"},
+//        {value:3, text: "4 Times per Day" },
+        {value:0, text: "Every 1 Hours" },
+        {value:1, text: "Every 2 Hours"},
+        {value:2, text: "Every 3 Hours"},
+        {value:3, text: "Every 4 Hours"}
     ],
+
+    getTakeDate: function(pill, frequencyValue) {
+        var hourCount = 0;
+        if (frequencyValue == 0) {
+            hourCount = 1;
+        }
+
+        if (frequencyValue == 1) {
+            hourCount = 2;
+        }
+
+        if (frequencyValue == 1) {
+            hourCount = 3;
+        }
+
+        if (frequencyValue == 1) {
+            hourCount = 4;
+        }
+        
+        if (pill.taken == null) {
+            return new Date();
+        } else {
+            var next = new Date(pill.taken).add(Date.HOUR, hourCount);
+            if (next < new Date()) {
+                return new Date();
+            } else {
+                return new Date(next);
+            }
+        }
+    },
+
     getByValue: function(val) {
         return _.detect(this.items,
                 function(f) {
@@ -37,9 +85,9 @@ app.stores.frequencies = {
                 });
     },
 
-    clone: function(){
-        _.map(this.items, function(f) {
-                return { text: f.text, value: f.value};
+    clone: function() {
+        return _.map(this.items, function(f) {
+            return { text: f.text, value: f.value};
         });
     }
 };
