@@ -111,6 +111,7 @@ app.controllers.prescriptions = new Ext.Controller({
         prescription.quantity = data.quantity;
         prescription.doctor = data.doctor_id;
         prescription.frequency = data.frequency;
+        prescription.time = data.time;
 
         persistence.add(prescription);
 
