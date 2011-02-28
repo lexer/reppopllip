@@ -97,6 +97,13 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
                     label: 'Doctor',
                     xtype: 'selectfield',
                     modal: true
+                },
+                {
+                    placeHolder: 'Select time',
+                    name : 'taken',
+                    label: 'Time',
+                    xtype: 'timepickerfield',
+                    modal: true
                 }
             ]
         },

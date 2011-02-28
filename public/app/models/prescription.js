@@ -42,10 +42,15 @@ app.stores.frequencies = {
 //        {value:1, text: "2 Times per Day"},
 //        {value:2, text: "3 Times per Day"},
 //        {value:3, text: "4 Times per Day" },
-        {value:0, text: "Every 1 Hours" },
-        {value:1, text: "Every 2 Hours"},
-        {value:2, text: "Every 3 Hours"},
-        {value:3, text: "Every 4 Hours"}
+        {value:0, text: "Day" },
+        {value:1, text: "1 Hour" },
+        {value:2, text: "2 Hours"},
+        {value:3, text: "3 Hours"},
+        {value:4, text: "4 Hours"},
+        {value:5, text: "5 Hours"},
+        {value:6, text: "6 Hours"},
+        {value:7, text: "7 Hours"},
+        {value:8, text: "8 Hours"}
     ],
 
     getTakeDate: function(pill, frequencyValue) {

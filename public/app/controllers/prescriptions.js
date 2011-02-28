@@ -21,7 +21,7 @@ app.controllers.prescriptions = new Ext.Controller({
         var controller = this;
 
         db.Prescription.all().prefetch("doctor").filter("id", '=', id).one(function(prescription) {
-            var model = controller.createModel(prescription);
+            var model = app.models.Prescription.createFromEntity(prescription);
             app.views.prescriptionsShow.updateWithRecord(model);
             app.views.viewport.setActiveItem(
                     app.views.prescriptionsShow, options.animation
