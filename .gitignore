@@ -36,4 +36,4 @@ local.properties
 *.ipr
 *.iws
 
-/resources/scss/.sass-cache
+public/resources/scss/.sass-cache
