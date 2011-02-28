@@ -18,11 +18,11 @@ app.views.ActivityIndex = Ext.extend(Ext.Panel, {
             store: app.stores.prescriptions,
             itemTpl:
                     ['<h4>{name}</h4>',
-                        '<p>take:{take:date("H:i")}</p>',
-//                        '<p>taken: {taken}</p>',
+                        '<p>{take:date("H:i A")}</p>',
+                        '<p>{name}</p>',
                         '<p>{description}</p>',
                         '<p>Take: {frequency_name}</p>',
-                        '<p>Quantity: {quantity}</p>',
+                        '<p>Pop: {quantity}</p>',
                         '<p>Doctor: {doctor_name}</p>',
                         '<button onclick="Ext.getCmp(\'activity_list\').onItemTake(\'{id}\')" >Take</button>'
                     ],

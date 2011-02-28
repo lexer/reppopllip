@@ -41,11 +41,14 @@ app.views.PrescriptionsShow = Ext.extend(Ext.Panel, {
     layout: 'fit',
     items: [
         {
-            tpl: ['<h4>{name}</h4>',
+            tpl: [
+                '<h4>{name}</h4>',
                 '<p>{description}</p>',
-                '<p>Take: {frequency_name}</p>',
                 '<p>Quantity: {quantity}</p>',
-                '<p>Doctor: {doctor_name}</p>']
+                '<p>Doctor: {doctor_name}</p>',
+                '<p>Take: {frequency_name}</p>',
+                '<p>Time: {time:date("H:i A")}</p>'
+            ]
 
         }
     ],

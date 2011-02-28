@@ -83,14 +83,6 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
                     xtype: 'numberfield'
                 },
                 {
-                    id: 'frequencies_select',
-                    placeHolder: 'Select frequency',
-                    name : 'frequency',
-                    label: 'Frequency',
-                    xtype: 'selectfield',
-                    modal: true
-                },
-                {
                     id: 'doctors_select',
                     placeHolder: 'Select doctor',
                     name : 'doctor_id',
@@ -99,8 +91,16 @@ app.views.PrescriptionsEdit = Ext.extend(Ext.Panel, {
                     modal: true
                 },
                 {
+                    id: 'frequencies_select',
+                    placeHolder: 'Select frequency',
+                    name : 'frequency',
+                    label: 'Frequency',
+                    xtype: 'selectfield',
+                    modal: true
+                },
+                {
                     placeHolder: 'Select time',
-                    name : 'taken',
+                    name : 'time',
                     label: 'Time',
                     xtype: 'timepickerfield',
                     modal: true

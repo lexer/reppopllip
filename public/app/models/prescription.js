@@ -8,7 +8,7 @@ app.models.Prescription = Ext.regModel("app.models.Prescription", {
         {name: 'doctor_name', type: 'string'},
         {name: 'frequency_name', type: 'string'},
         {name: 'frequency', type: 'integer'},
-        {name: 'created', type: 'date'},
+        {name: 'time', type: 'date', defaultValue: new Date()},
         {name: 'next_time', type: 'date'},
         {name: 'taken', type: 'date'}
     ]
@@ -30,6 +30,7 @@ app.models.Prescription.createFromEntity = function(entity) {
         description: entity.description,
         quantity: entity.quantity,
         taken: entity.taken,
+        time: entity.time,
         frequency: entity.frequency,
         frequency_name: app.stores.frequencies.getByValue(entity.frequency).text,
         take: app.stores.frequencies.getTakeDate(entity, entity.frequency)
@@ -53,34 +54,22 @@ app.stores.frequencies = {
         {value:8, text: "8 Hours"}
     ],
 
-    getTakeDate: function(pill, frequencyValue) {
-        var hourCount = 0;
-        if (frequencyValue == 0) {
-            hourCount = 1;
+    getTakeDate: function(pill, frequency) {
+        var now = new Date();
+        now.setSeconds(0, 0);
+
+        var time = new Date();
+        time.setHours(pill.time.getHours(), pill.time.getMinutes(), 0, 0, 0);
+
+        if (pill.taken != null) {
+            time = new Date().add(Date.HOUR, frequency);
         }
 
-        if (frequencyValue == 1) {
-            hourCount = 2;
+        if (now < time) {
+            return time;
         }
 
-        if (frequencyValue == 2) {
-            hourCount = 3;
-        }
-
-        if (frequencyValue == 3) {
-            hourCount = 4;
-        }
-        
-        if (pill.taken == null) {
-            return new Date();
-        } else {
-            var next = new Date(pill.taken).add(Date.HOUR, hourCount);
-            if (next < new Date()) {
-                return new Date();
-            } else {
-                return new Date(next);
-            }
-        }
+        return now;
     },
 
     getByValue: function(val) {

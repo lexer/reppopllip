@@ -2,7 +2,7 @@
 
 var app = Ext.regApplication({
     name: 'app',
-    version: '0.1.2',
+    version: '0.1.3',
     launch: function() {
         var that = this;
         this.launched = true;
