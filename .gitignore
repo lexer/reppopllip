@@ -31,3 +31,9 @@ local.properties
 /design
 
 .idea/*
+
+*.iml
+*.ipr
+*.iws
+
+/resources/scss/.sass-cache
